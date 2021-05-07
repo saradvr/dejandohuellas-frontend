@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { history } from '../utils/history';
 const LOADING = 'LOADING';
-const CREATE_USER = 'CREATE_USER';
+const DEFINE_USER = 'DEFINE_USER';
 const USER_ERROR = 'USER_ERROR';
 const USER_FINISHED = 'USER_FINISHED';
 
@@ -21,7 +21,7 @@ export function createUser(name, email, password, userType) {
           userType,
         },
       });
-      dispatch({ type: CREATE_USER, payload: data.user });
+      dispatch({ type: DEFINE_USER, payload: data.user });
       localStorage.setItem('token', data.token);
       localStorage.setItem('userType', userType);
       history.push('/adopta');
@@ -34,14 +34,32 @@ export function createUser(name, email, password, userType) {
       } else {
         dispatch({ type: USER_ERROR, payload: error.message });
       }
-      if (
-        error.response !== undefined &&
-        error.response.request.status === 401
-      ) {
-        localStorage.removeItem('token');
-        alert('Su sesión expiró, ingrese nuevamente.');
-        history.push('/login');
-      }
+    } finally {
+      dispatch({ type: USER_FINISHED });
+    }
+  };
+}
+
+export function login(email, password) {
+  return async function (dispatch) {
+    dispatch({ type: LOADING });
+    dispatch({ type: USER_ERROR, payload: '' });
+    try {
+      const { data } = await axios({
+        method: 'POST',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: '/users/login',
+        data: {
+          email,
+          password,
+        },
+      });
+      dispatch({ type: DEFINE_USER, payload: data.user });
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('userType', data.userType);
+      history.push('/adopta');
+    } catch (error) {
+      dispatch({ type: USER_ERROR, payload: error.response.data.message });
     } finally {
       dispatch({ type: USER_FINISHED });
     }
@@ -61,7 +79,7 @@ export function userReducer(state = initialState, action) {
         ...state,
         loading: true,
       };
-    case CREATE_USER:
+    case DEFINE_USER:
       return {
         ...state,
         user: action.payload,
