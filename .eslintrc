@@ -28,6 +28,7 @@
     "semi": ["error", "always"],
     "no-await-in-loop": 1,
     "no-console": 1,
-    "no-unused-vars": 1
+    "no-unused-vars": 1,
+    "no-extra-boolean-cast": 0
   }
 }

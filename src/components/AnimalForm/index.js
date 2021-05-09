@@ -1,19 +1,28 @@
 import { Button } from '../Button';
 import { useState } from 'react';
 import { Input } from '../Input';
-import { useDispatch } from 'react-redux';
-import { createAnimal, HIDE_MODAL } from '../../store/animalReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  createAnimal,
+  HIDE_MODAL,
+  updateAnimal,
+} from '../../store/animalReducer';
 
-export function NewAnimalForm() {
-  const [name, setName] = useState('');
-  const [animalType, setType] = useState('');
-  const [age, setAge] = useState('');
-  const [sex, setSex] = useState('');
-  const [rescueHistory, setHistory] = useState('');
-  const [size, setSize] = useState('');
+export function AnimalForm({ update, animalId }) {
+  const { animal } = useSelector(({ animalReducer }) => ({
+    animal: animalReducer.animal,
+  }));
+  const [name, setName] = useState(!!update ? animal.name : '');
+  const [animalType, setType] = useState(!!update ? animal.animalType : '');
+  const [age, setAge] = useState(!!update ? animal.age : '');
+  const [sex, setSex] = useState(!!update ? animal.sex : '');
+  const [rescueHistory, setHistory] = useState(!!update ? animal.history : '');
+  const [size, setSize] = useState(!!update ? animal.size : '');
   const [profilePicture, setProfilePicture] = useState(null);
-  const [imagePreview, setPreview] = useState(null);
-  const [city, setCity] = useState('');
+  const [imagePreview, setPreview] = useState(
+    !!update ? animal.profilePicture : ''
+  );
+  const [city, setCity] = useState(!!update ? animal.city : '');
   const [errorFile, setErrorFile] = useState('');
   const dispatch = useDispatch();
 
@@ -45,7 +54,11 @@ export function NewAnimalForm() {
     if (profilePicture) {
       data.append('profilePicture', profilePicture[0], profilePicture[0].name);
     }
-    dispatch(createAnimal(data));
+    if (update === false) {
+      dispatch(createAnimal(data));
+    } else {
+      dispatch(updateAnimal(data, animalId));
+    }
     dispatch({ type: HIDE_MODAL });
   }
 
@@ -68,8 +81,12 @@ export function NewAnimalForm() {
         required={true}
       >
         <option value="">Selecciona una opción</option>
-        <option value="Perro">Perro</option>
-        <option value="Gato">Gato</option>
+        <option value="Perro" selected={animalType === 'Perro' ? true : false}>
+          Perro
+        </option>
+        <option value="Gato" selected={animalType === 'Gato' ? true : false}>
+          Gato
+        </option>
       </select>
       <label htmlFor="age">Edad (meses):</label>
       <Input
@@ -88,8 +105,12 @@ export function NewAnimalForm() {
         required={true}
       >
         <option value="">Seleccione una opción</option>
-        <option value="Macho">Macho</option>
-        <option value="Hembra">Hembra</option>
+        <option value="Macho" selected={sex === 'Macho' ? true : false}>
+          Macho
+        </option>
+        <option value="Hembra" selected={sex === 'Hembra' ? true : false}>
+          Hembra
+        </option>
       </select>
       <label htmlFor="size">Tamaño:</label>
       <select
@@ -99,9 +120,15 @@ export function NewAnimalForm() {
         required={true}
       >
         <option value="">Selecciona una opción:</option>
-        <option value="Pequeño">Pequeño</option>
-        <option value="Mediano">Mediano</option>
-        <option value="Grande">Grande</option>
+        <option value="Pequeño" selected={size === 'Pequeño' ? true : false}>
+          Pequeño
+        </option>
+        <option value="Mediano" selected={size === 'Mediano' ? true : false}>
+          Mediano
+        </option>
+        <option value="Grande" selected={size === 'Grande' ? true : false}>
+          Grande
+        </option>
       </select>
       <label htmlFor="city">Ciudad:</label>
       <select
@@ -111,10 +138,21 @@ export function NewAnimalForm() {
         required={true}
       >
         <option value="">Seleccione una opción</option>
-        <option value="Medellín">Medellín</option>
-        <option value="Bogotá">Bogotá</option>
-        <option value="Cali">Cali</option>
-        <option value="Cartagena">Cartagena</option>
+        <option value="Medellín" selected={city === 'Medellín' ? true : false}>
+          Medellín
+        </option>
+        <option value="Bogotá" selected={city === 'Bogotá' ? true : false}>
+          Bogotá
+        </option>
+        <option value="Cali" selected={city === 'Cali' ? true : false}>
+          Cali
+        </option>
+        <option
+          value="Cartagena"
+          selected={city === 'Cartagena' ? true : false}
+        >
+          Cartagena
+        </option>
       </select>
       <label htmlFor="rescueHistory">Historia:</label>
       <textarea
@@ -132,7 +170,7 @@ export function NewAnimalForm() {
         name="profilePicture"
         id="profilePicture"
         onChange={handleChange}
-        required={true}
+        required={!update ? true : false}
       />
       {!!imagePreview && (
         <img
@@ -141,7 +179,9 @@ export function NewAnimalForm() {
           alt="Vista previa de foto de perfil"
         />
       )}
-      <Button type="submit">Guardar peludo</Button>
+      <Button type="submit">
+        {!!update ? 'Actualizar información' : 'Guardar peludo'}
+      </Button>
       {!!errorFile && (
         <p>Hubo un error al cargar la imagen, intente de nuevo.</p>
       )}
