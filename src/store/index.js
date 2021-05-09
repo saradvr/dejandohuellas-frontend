@@ -2,9 +2,13 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { userReducer } from './userReducer';
+import { animalReducer } from './animalReducer';
+import { ongReducer } from './ongReducer';
 
 const appReducer = combineReducers({
   userReducer,
+  animalReducer,
+  ongReducer,
 });
 
 const rootReducer = (state, action) => {
