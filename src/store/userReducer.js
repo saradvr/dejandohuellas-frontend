@@ -24,7 +24,7 @@ export function createUser(name, email, password, userType) {
       dispatch({ type: DEFINE_USER, payload: data.user });
       localStorage.setItem('token', data.token);
       localStorage.setItem('userType', userType);
-      history.push('/adopta');
+      history.push('/profile');
     } catch (error) {
       if (!!error && !!error.response.data.error.errors.email.message) {
         dispatch({
@@ -57,7 +57,7 @@ export function login(email, password) {
       dispatch({ type: DEFINE_USER, payload: data.user });
       localStorage.setItem('token', data.token);
       localStorage.setItem('userType', data.userType);
-      history.push('/adopta');
+      history.push('/');
     } catch (error) {
       dispatch({ type: USER_ERROR, payload: error.response.data.message });
     } finally {
