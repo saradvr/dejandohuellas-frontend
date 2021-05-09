@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
-import { NewAnimalForm } from '../../components/NewAnimalForm';
+import { AnimalForm } from '../../components/AnimalForm';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { SHOW_MODAL, HIDE_MODAL } from '../../store/animalReducer';
@@ -9,18 +9,21 @@ import { getOng } from '../../store/ongReducer';
 import { AnimalCard } from '../../components/AnimalCard';
 
 export function OngProfile({ isPublic }) {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getOng());
-  });
+  }, [dispatch]);
 
-  const dispatch = useDispatch();
   const { showModal, ong } = useSelector(({ animalReducer, ongReducer }) => ({
     showModal: animalReducer.showModal,
     ong: ongReducer.ong,
   }));
+
   return (
     <>
       <Header />
+      <h1>FUNDACIÓN DEJANDO HUELLAS</h1>
       <section>
         <img
           src="https://image.shutterstock.com/image-vector/flat-design-paw-print-icon-260nw-461822491.jpg"
@@ -43,7 +46,7 @@ export function OngProfile({ isPublic }) {
       <section>
         {!!ong && !!ong.animals && ong.animals.length > 0 ? (
           ong.animals.map((e) => {
-            return <AnimalCard animal={e} />;
+            return <AnimalCard key={e._id} animal={e} />;
           })
         ) : (
           <p>Aún no se ha agregado ningún peludo</p>
@@ -67,7 +70,7 @@ export function OngProfile({ isPublic }) {
           <Modal.Title>Agregar un nuevo peludo</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <NewAnimalForm />
+          <AnimalForm update={false} />
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={(e) => dispatch({ type: HIDE_MODAL })} type="button">

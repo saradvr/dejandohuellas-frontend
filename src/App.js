@@ -8,6 +8,7 @@ import { Inicio } from './pages/Inicio';
 import { OngProfile } from './pages/OngProfile';
 import { UserProfile } from './components/UserProfile';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { AnimalProfile } from './pages/AnimalProfile';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route exact path="/ong/:ongId">
           <OngProfile isPublic={false} />
+        </Route>
+        <Route exact path="/peludo/:animalId">
+          <AnimalProfile edit={false} />
         </Route>
       </Switch>
     </Router>

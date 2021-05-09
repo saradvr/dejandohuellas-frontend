@@ -42,6 +42,60 @@ export function createAnimal(form) {
   };
 }
 
+export function updateAnimal(form, animalId) {
+  return async function (dispatch) {
+    dispatch({ type: SAVING });
+    dispatch({ type: ERROR, payload: '' });
+    try {
+      const token = localStorage.getItem('token');
+      const { data } = await axios({
+        method: 'PUT',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: `/animals/${animalId}/update`,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+        data: form,
+      });
+      dispatch({ type: SUCCESS_ANIMAL, payload: data.animal });
+    } catch (error) {
+      dispatch({ type: ERROR, payload: error.message });
+      if (!!error.response && error.response.request.status === 401) {
+        localStorage.removeItem('token');
+        alert('Su sesión expiró, ingrese nuevamente.');
+        history.push('/entrar');
+      }
+    } finally {
+      dispatch({ type: FINISHED });
+    }
+  };
+}
+
+export function getAnimal(animalId) {
+  return async function (dispatch) {
+    dispatch({ type: SAVING });
+    dispatch({ type: ERROR, payload: '' });
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: `/animals/${animalId}`,
+      });
+      dispatch({ type: SUCCESS_ANIMAL, payload: data.animal });
+    } catch (error) {
+      dispatch({ type: ERROR, payload: error.message });
+      if (!!error.response && error.response.request.status === 401) {
+        localStorage.removeItem('token');
+        alert('Su sesión expiró, ingrese nuevamente.');
+        history.push('/entrar');
+      }
+    } finally {
+      dispatch({ type: FINISHED });
+    }
+  };
+}
+
 const initialState = {
   loading: false,
   saving: false,
