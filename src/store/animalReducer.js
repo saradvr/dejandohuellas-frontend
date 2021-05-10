@@ -74,7 +74,7 @@ export function updateAnimal(form, animalId) {
 
 export function getAnimal(animalId) {
   return async function (dispatch) {
-    dispatch({ type: SAVING });
+    dispatch({ type: LOADING });
     dispatch({ type: ERROR, payload: '' });
     try {
       const { data } = await axios({
@@ -85,11 +85,6 @@ export function getAnimal(animalId) {
       dispatch({ type: SUCCESS_ANIMAL, payload: data.animal });
     } catch (error) {
       dispatch({ type: ERROR, payload: error.message });
-      if (!!error.response && error.response.request.status === 401) {
-        localStorage.removeItem('token');
-        alert('Su sesión expiró, ingrese nuevamente.');
-        history.push('/entrar');
-      }
     } finally {
       dispatch({ type: FINISHED });
     }

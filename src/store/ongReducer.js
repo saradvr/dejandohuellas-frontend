@@ -34,6 +34,25 @@ export function getOng() {
   };
 }
 
+export function getPublicOng(ongId) {
+  return async function (dispatch) {
+    dispatch({ type: LOADING });
+    dispatch({ type: ERROR, payload: '' });
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: `/ong/${ongId}`,
+      });
+      dispatch({ type: ONG_LOADED, payload: data.ong });
+    } catch (error) {
+      dispatch({ type: ERROR, payload: error.message });
+    } finally {
+      dispatch({ type: FINISHED });
+    }
+  };
+}
+
 const initialState = {
   ong: {},
   loading: false,
