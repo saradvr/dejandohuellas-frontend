@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../../store/userReducer';
 import { Header } from '../../components/Header';
 import { useHistory } from 'react-router';
+import { FormLabel } from '../../components/FormLabel';
+import { FormSelect } from '../../components/FormSelect';
+import { StyledMain } from '../../components/Main';
+import { StyledForm } from './styles';
 
 export function Register() {
   const [name, setName] = useState('');
@@ -44,59 +48,61 @@ export function Register() {
   return (
     <>
       <Header />
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Nombre</label>
-        <Input
-          type="text"
-          name="name"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required={true}
-        />
-        <label htmlFor="email">Correo</label>
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required={true}
-        />
-        <label htmlFor="password">Contraseña</label>
-        <Input
-          type="password"
-          name="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required={true}
-        />
-        <label htmlFor="confirmPass">Confirme su contraseña</label>
-        <Input
-          type="password"
-          name="confirmPass"
-          id="confirmPass"
-          value={confirmPass}
-          onChange={(e) => setConfirmPass(e.target.value)}
-          required={true}
-        />
-        <label htmlFor="userType">Tipo de usuario</label>
-        <select
-          name="userType"
-          id="userType"
-          onChange={(e) => setUserTYpe(e.target.value)}
-          required={true}
-        >
-          <option value="">Selecciona una opción</option>
-          <option value="ONG">Fundación</option>
-          <option value="Persona">Persona</option>
-        </select>
-        {!!errorPwd && <p>{errorPwd}</p>}
-        {!!error && <p>{error}</p>}
-        {!!loading && <p>{loading}</p>}
-        <Button type="submit">Registrarme</Button>
-      </form>
+      <StyledMain>
+        <StyledForm onSubmit={handleSubmit}>
+          <FormLabel htmlFor="name">Nombre</FormLabel>
+          <Input
+            type="text"
+            name="name"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required={true}
+          />
+          <FormLabel htmlFor="email">Correo</FormLabel>
+          <Input
+            type="email"
+            name="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required={true}
+          />
+          <FormLabel htmlFor="password">Contraseña</FormLabel>
+          <Input
+            type="password"
+            name="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required={true}
+          />
+          <FormLabel htmlFor="confirmPass">Confirme su contraseña</FormLabel>
+          <Input
+            type="password"
+            name="confirmPass"
+            id="confirmPass"
+            value={confirmPass}
+            onChange={(e) => setConfirmPass(e.target.value)}
+            required={true}
+          />
+          <FormLabel htmlFor="userType">Tipo de usuario</FormLabel>
+          <FormSelect
+            name="userType"
+            id="userType"
+            onChange={(e) => setUserTYpe(e.target.value)}
+            required={true}
+          >
+            <option value="">Selecciona una opción</option>
+            <option value="ONG">Fundación</option>
+            <option value="Persona">Persona</option>
+          </FormSelect>
+          {!!errorPwd && <p>{errorPwd}</p>}
+          {!!error && <p>{error}</p>}
+          {!!loading && <p>{loading}</p>}
+          <Button type="submit">Registrarme</Button>
+        </StyledForm>
+      </StyledMain>
     </>
   );
 }

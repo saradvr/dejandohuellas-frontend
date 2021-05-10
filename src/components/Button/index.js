@@ -1,7 +1,9 @@
+import { StyledButton } from './styles';
+
 export function Button({ type, children, onClick }) {
   return (
-    <button type={type} onClick={onClick}>
+    <StyledButton type={type} onClick={onClick}>
       {children}
-    </button>
+    </StyledButton>
   );
 }

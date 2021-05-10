@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export function AnimalCard({ animal }) {
+export function AnimalCard({ animal, edit }) {
   const { profilePicture, name, age, _id, sex } = animal;
   let time = age === 1 ? 'mes' : 'meses';
   let ageYears = age;
@@ -16,7 +16,9 @@ export function AnimalCard({ animal }) {
         Tengo {ageYears} {time} y estoy {sex === 'Macho' ? 'listo' : 'lista'}{' '}
         para dejar huella en tu hogar.
       </p>
-      <Link to={`/peludo/${_id}`}>¡Conoce más sobre mí!</Link>
+      <Link to={!!edit ? `/peludo/${_id}/edit` : `/peludo/${_id}`}>
+        ¡Conoce más sobre mí!
+      </Link>
     </article>
   );
 }

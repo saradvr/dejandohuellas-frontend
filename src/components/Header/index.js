@@ -1,7 +1,12 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
-import { Button } from '../Button';
+import {
+  HeaderButton,
+  HeaderLink,
+  LogoSection,
+  MainNav,
+  NavSection,
+} from './styles';
 
 export function Header() {
   const history = useHistory();
@@ -15,17 +20,26 @@ export function Header() {
   const token = localStorage.getItem('token');
 
   return (
-    <nav>
-      <Link to="/">Inicio</Link>
-      {!token && <Link to="/entrar">Iniciar sesión</Link>}
-      {!token && <Link to="/registro">Regristrarme</Link>}
-      {token && <Link to="/profile">Mi perfil</Link>}
-      {<Link to="/adopta">¡Adopta!</Link>}
-      {token && (
-        <Button type="button" onClick={logout}>
-          Cerrar sesión
-        </Button>
-      )}
-    </nav>
+    <MainNav>
+      <LogoSection>
+        <img
+          src="https://dbdzm869oupei.cloudfront.net/img/sticker/preview/9393.png"
+          alt="Logo Dejando Huellas"
+          width="10%"
+        />
+      </LogoSection>
+      <NavSection>
+        <HeaderLink to="/">Inicio</HeaderLink>
+        {!token && <HeaderLink to="/entrar">Iniciar sesión</HeaderLink>}
+        {!token && <HeaderLink to="/registro">Regristrarme</HeaderLink>}
+        {token && <HeaderLink to="/profile">Mi perfil</HeaderLink>}
+        {<HeaderLink to="/adopta">¡Adopta!</HeaderLink>}
+        {token && (
+          <HeaderButton type="button" onClick={logout}>
+            Cerrar sesión
+          </HeaderButton>
+        )}
+      </NavSection>
+    </MainNav>
   );
 }

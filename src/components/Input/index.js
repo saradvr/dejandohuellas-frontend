@@ -1,6 +1,8 @@
+import { StyledInput } from './styles';
+
 export function Input({ type, name, id, value, onChange, required }) {
   return (
-    <input
+    <StyledInput
       type={type}
       name={name}
       id={id}

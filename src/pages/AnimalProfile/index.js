@@ -7,18 +7,24 @@ import { getAnimal } from '../../store/animalReducer';
 import Modal from 'react-bootstrap/Modal';
 import { SHOW_MODAL, HIDE_MODAL } from '../../store/animalReducer';
 import { AnimalForm } from '../../components/AnimalForm';
+import { StyledMain } from '../../components/Main';
+import { StyledModal } from '../../components/ModalAnimalInfo';
 
-export function AnimalProfile(edit) {
+export function AnimalProfile({ edit }) {
   const dispatch = useDispatch();
   const { animalId } = useParams();
   useEffect(() => {
     dispatch(getAnimal(animalId));
   }, [dispatch, animalId]);
 
-  const { animal, showModal } = useSelector(({ animalReducer }) => ({
-    animal: animalReducer.animal,
-    showModal: animalReducer.showModal,
-  }));
+  const { animal, showModal, loading, error } = useSelector(
+    ({ animalReducer }) => ({
+      animal: animalReducer.animal,
+      showModal: animalReducer.showModal,
+      loading: animalReducer.loading,
+      error: animalReducer.error,
+    })
+  );
 
   if (!animal) return;
 
@@ -31,10 +37,13 @@ export function AnimalProfile(edit) {
     time = ageYears === 1 ? 'año' : 'años';
   }
 
+  if (!!error) return <p>Hubo un error, por favor intente nuevamente.</p>;
+
   return (
     <>
       <Header />
-      <main>
+      {!!loading && <p>Cargando información...</p>}
+      <StyledMain>
         <img src={profilePicture} alt="Perfil del peludo" />
         <section>
           <h2>{name}</h2>
@@ -49,34 +58,31 @@ export function AnimalProfile(edit) {
         <section>
           <p>{history}</p>
         </section>
-        <section>
-          <Button type="button" onClick={(e) => dispatch({ type: SHOW_MODAL })}>
-            Actualizar información
-          </Button>
-        </section>
-        <Modal
+        {!!edit && (
+          <section>
+            <Button
+              type="button"
+              onClick={(e) => dispatch({ type: SHOW_MODAL })}
+            >
+              Actualizar información
+            </Button>
+          </section>
+        )}
+        <StyledModal
           show={showModal}
           onHide={(e) => dispatch({ type: HIDE_MODAL })}
           backdrop="static"
           keyboard={false}
           centered
         >
-          <Modal.Header>
+          <Modal.Header closeButton>
             <Modal.Title>Actualiza mi información</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <AnimalForm update={true} animalId={animalId} />
           </Modal.Body>
-          <Modal.Footer>
-            <Button
-              onClick={(e) => dispatch({ type: HIDE_MODAL })}
-              type="button"
-            >
-              Cancelar
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </main>
+        </StyledModal>
+      </StyledMain>
     </>
   );
 }

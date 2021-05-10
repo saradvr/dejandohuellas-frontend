@@ -7,6 +7,16 @@ import {
   HIDE_MODAL,
   updateAnimal,
 } from '../../store/animalReducer';
+import { FormLabel } from '../FormLabel';
+import { FormSelect } from '../FormSelect';
+import { StyledTextArea } from '../FormTextArea';
+import {
+  LeftSection,
+  TwoSectionForm,
+  RightSection,
+  ImgPreviewSection,
+  ImgPreview,
+} from './styles';
 
 export function AnimalForm({ update, animalId }) {
   const { animal } = useSelector(({ animalReducer }) => ({
@@ -64,121 +74,107 @@ export function AnimalForm({ update, animalId }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Nombre:</label>
-      <Input
-        type="text"
-        name="name"
-        id="name"
-        onChange={(e) => setName(e.target.value)}
-        value={name}
-        required={true}
-      />
-      <label htmlFor="animalType">Tipo de peludo:</label>
-      <select
-        name="animalType"
-        id="animalType"
-        onChange={(e) => setType(e.target.value)}
-        required={true}
-      >
-        <option value="">Selecciona una opción</option>
-        <option value="Perro" selected={animalType === 'Perro' ? true : false}>
-          Perro
-        </option>
-        <option value="Gato" selected={animalType === 'Gato' ? true : false}>
-          Gato
-        </option>
-      </select>
-      <label htmlFor="age">Edad (meses):</label>
-      <Input
-        type="number"
-        name="age"
-        id="age"
-        value={age}
-        onChange={(e) => setAge(e.target.value)}
-        required={true}
-      />
-      <label htmlFor="sex">Sexo:</label>
-      <select
-        name="sex"
-        id="sex"
-        onChange={(e) => setSex(e.target.value)}
-        required={true}
-      >
-        <option value="">Seleccione una opción</option>
-        <option value="Macho" selected={sex === 'Macho' ? true : false}>
-          Macho
-        </option>
-        <option value="Hembra" selected={sex === 'Hembra' ? true : false}>
-          Hembra
-        </option>
-      </select>
-      <label htmlFor="size">Tamaño:</label>
-      <select
-        name="size"
-        id="size"
-        onChange={(e) => setSize(e.target.value)}
-        required={true}
-      >
-        <option value="">Selecciona una opción:</option>
-        <option value="Pequeño" selected={size === 'Pequeño' ? true : false}>
-          Pequeño
-        </option>
-        <option value="Mediano" selected={size === 'Mediano' ? true : false}>
-          Mediano
-        </option>
-        <option value="Grande" selected={size === 'Grande' ? true : false}>
-          Grande
-        </option>
-      </select>
-      <label htmlFor="city">Ciudad:</label>
-      <select
-        name="city"
-        id="city"
-        onChange={(e) => setCity(e.target.value)}
-        required={true}
-      >
-        <option value="">Seleccione una opción</option>
-        <option value="Medellín" selected={city === 'Medellín' ? true : false}>
-          Medellín
-        </option>
-        <option value="Bogotá" selected={city === 'Bogotá' ? true : false}>
-          Bogotá
-        </option>
-        <option value="Cali" selected={city === 'Cali' ? true : false}>
-          Cali
-        </option>
-        <option
-          value="Cartagena"
-          selected={city === 'Cartagena' ? true : false}
-        >
-          Cartagena
-        </option>
-      </select>
-      <label htmlFor="rescueHistory">Historia:</label>
-      <textarea
-        id="rescueHistory"
-        name="rescueHistory"
-        value={rescueHistory}
-        onChange={(e) => setHistory(e.target.value)}
-        required={true}
-        placeholder="Cuéntale a todos un poco de la historia de este peludo."
-      />
-      <label htmlFor="profilePicture">Foto de perfil:</label>
-      <Input
-        type="file"
-        accept="image/*"
-        name="profilePicture"
-        id="profilePicture"
-        onChange={handleChange}
-        required={!update ? true : false}
-      />
-      {!!imagePreview && (
-        <img
-          width="10%"
-          src={imagePreview}
-          alt="Vista previa de foto de perfil"
-        />
-      )}
+      <TwoSectionForm>
+        <LeftSection>
+          <FormLabel htmlFor="name">Nombre:</FormLabel>
+          <Input
+            type="text"
+            name="name"
+            id="name"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            required={true}
+          />
+          <FormLabel htmlFor="animalType">Tipo de peludo:</FormLabel>
+          <FormSelect
+            name="animalType"
+            id="animalType"
+            onChange={(e) => setType(e.target.value)}
+            required={true}
+            defaultValue={animalType}
+          >
+            <option value="">Selecciona una opción</option>
+            <option value="Perro">Perro</option>
+            <option value="Gato">Gato</option>
+          </FormSelect>
+          <FormLabel htmlFor="age">Edad (meses):</FormLabel>
+          <Input
+            type="number"
+            name="age"
+            id="age"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            required={true}
+          />
+          <FormLabel htmlFor="sex">Sexo:</FormLabel>
+          <FormSelect
+            name="sex"
+            id="sex"
+            onChange={(e) => setSex(e.target.value)}
+            required={true}
+            defaultValue={sex}
+          >
+            <option value="">Seleccione una opción</option>
+            <option value="Macho">Macho</option>
+            <option value="Hembra">Hembra</option>
+          </FormSelect>
+          <FormLabel htmlFor="size">Tamaño:</FormLabel>
+          <FormSelect
+            name="size"
+            id="size"
+            onChange={(e) => setSize(e.target.value)}
+            required={true}
+            defaultValue={size}
+          >
+            <option value="">Selecciona una opción:</option>
+            <option value="Pequeño">Pequeño</option>
+            <option value="Mediano">Mediano</option>
+            <option value="Grande">Grande</option>
+          </FormSelect>
+          <FormLabel htmlFor="city">Ciudad:</FormLabel>
+          <FormSelect
+            name="city"
+            id="city"
+            onChange={(e) => setCity(e.target.value)}
+            required={true}
+            defaultValue={city}
+          >
+            <option value="">Seleccione una opción</option>
+            <option value="Medellín">Medellín</option>
+            <option value="Bogotá">Bogotá</option>
+            <option value="Cali">Cali</option>
+            <option value="Cartagena">Cartagena</option>
+          </FormSelect>
+        </LeftSection>
+        <RightSection>
+          <FormLabel htmlFor="rescueHistory">Historia:</FormLabel>
+          <StyledTextArea
+            id="rescueHistory"
+            name="rescueHistory"
+            value={rescueHistory}
+            onChange={(e) => setHistory(e.target.value)}
+            required={true}
+            placeholder="Cuéntale a todos un poco de la historia de este peludo."
+          />
+          <FormLabel htmlFor="profilePicture">Foto de perfil:</FormLabel>
+          <ImgPreviewSection>
+            <Input
+              type="file"
+              accept="image/*"
+              name="profilePicture"
+              id="profilePicture"
+              onChange={handleChange}
+              required={!update ? true : false}
+            />
+            {!!imagePreview && (
+              <ImgPreview
+                src={imagePreview}
+                alt="Vista previa de foto de perfil"
+              />
+            )}
+          </ImgPreviewSection>
+        </RightSection>
+      </TwoSectionForm>
       <Button type="submit">
         {!!update ? 'Actualizar información' : 'Guardar peludo'}
       </Button>
