@@ -15,16 +15,27 @@ export const NombreONG = styled.h1`
   }
 `;
 
-export const PrincipalSection = styled.section`
-  padding-bottom: 20px;
-  margin-bottom: 20px;
+export const AnimalsSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 `;
 
 export const InfoONG = styled.section`
-  padding: 20px;
   @media screen and (min-width: 768px) {
     display: grid;
     grid-template-columns: 1fr 2fr;
+  }
+
+  @media screen and (min-width: 1024px) {
+    margin-top: 20px;
   }
 `;
 
@@ -62,7 +73,7 @@ export const Description = styled.p`
   font-family: 'Lato';
   font-weight: 400;
   font-style: italic;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 export const Message = styled.p`

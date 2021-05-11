@@ -13,6 +13,7 @@ import { useParams } from 'react-router';
 import { Input } from '../../components/Input';
 import { FormLabel } from '../../components/FormLabel';
 import {
+  AnimalsSection,
   Banner,
   Description,
   DescriptionContainer,
@@ -20,7 +21,6 @@ import {
   LogoContainer,
   Message,
   NombreONG,
-  PrincipalSection,
   StyledLogo,
 } from './styles';
 import bannerImage from './Perfil-fundación.png';
@@ -83,118 +83,111 @@ export function OngProfile({ isPublic }) {
     }, 4000);
   }
 
-  if (!!error) return <Message>Algo salió mal, intenta nuevamente</Message>;
-
   return (
     <>
       <Header />
       <StyledMain height={'auto'}>
         {!!loading && <p>Cargando información...</p>}
-        <PrincipalSection>
-          <Banner src={bannerImage} alt="Banner adopta huellas" />
-          <InfoONG>
-            <LogoContainer>
-              <StyledLogo
-                src="https://image.shutterstock.com/image-vector/flat-design-paw-print-icon-260nw-461822491.jpg"
-                alt="logo huellas"
-              />
-            </LogoContainer>
-            <DescriptionContainer>
-              <NombreONG>FUNDACIÓN DEJANDO HUELLAS</NombreONG>
-              <Description>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                vel lectus ac risus egestas faucibus. Nulla pharetra efficitur
-                dui, lacinia ultrices felis iaculis vel. Aliquam ligula nisl,
-                ullamcorper nec lacus quis, pulvinar efficitur augue.
-                Pellentesque iaculis dui est, non aliquet nibh condimentum
-                consequat. Etiam porttitor venenatis sem consectetur pharetra.
-                Suspendisse pretium finibus pulvinar. Aliquam erat volutpat. Ut
-                placerat at diam id feugiat. Sed augue velit, iaculis eget
-                pulvinar varius, gravida vitae felis. Vivamus venenatis
-                malesuada nunc, in eleifend risus semper eget. Pellentesque eu
-                nibh id lectus tristique elementum.
-              </Description>
-              {!!isPublic && (
-                <Button type="button" onClick={(e) => setModalDonation(true)}>
-                  Hacer donación
-                </Button>
-              )}
-            </DescriptionContainer>
-          </InfoONG>
-          <ModalMessage
-            show={showModalDonation}
-            onHide={(e) => setModalDonation(false)}
-            backdrop="static"
-            keyboard={false}
-            centered
-          >
-            <Modal.Header>
-              <Modal.Title>¡Gracias por tu ayuda!</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <form>
-                <FormLabel htmlFor="donationAmount">
-                  ¿Cuánto deseas donar?
-                </FormLabel>
-                <Input
-                  type="number"
-                  id="donationAmount"
-                  name="donationAmount"
-                  value={donationAmount}
-                  onChange={(e) => setDonationAmount(e.target.value)}
-                />
-              </form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={(e) => setModalDonation(false)}>Cancelar</Button>
-              <Button onClick={donation} disabled={donationProcess}>
-                Pagar
+        {!!error && <Message>Algo salió mal, intenta nuevamente</Message>}
+        <Banner src={bannerImage} alt="Banner adopta huellas" />
+        <InfoONG>
+          <LogoContainer>
+            <StyledLogo
+              src="https://image.shutterstock.com/image-vector/flat-design-paw-print-icon-260nw-461822491.jpg"
+              alt="logo huellas"
+            />
+          </LogoContainer>
+          <DescriptionContainer>
+            <NombreONG>FUNDACIÓN DEJANDO HUELLAS</NombreONG>
+            <Description>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+              vel lectus ac risus egestas faucibus. Nulla pharetra efficitur
+              dui, lacinia ultrices felis iaculis vel. Aliquam ligula nisl,
+              ullamcorper nec lacus quis, pulvinar efficitur augue. Pellentesque
+              iaculis dui est, non aliquet nibh condimentum consequat. Etiam
+              porttitor venenatis sem consectetur pharetra. Suspendisse pretium
+              finibus pulvinar. Aliquam erat volutpat. Ut placerat at diam id
+              feugiat. Sed augue velit, iaculis eget pulvinar varius, gravida
+              vitae felis. Vivamus venenatis malesuada nunc, in eleifend risus
+              semper eget. Pellentesque eu nibh id lectus tristique elementum.
+            </Description>
+            {!!isPublic ? (
+              <Button type="button" onClick={(e) => setModalDonation(true)}>
+                Hacer donación
               </Button>
-            </Modal.Footer>
-          </ModalMessage>
-          <section>
-            {!!ong &&
-            !!ong.animals &&
-            ong.animals.length > 0 &&
-            !!ong.animals[0] ? (
-                ong.animals.map((e) => {
-                  return (
-                    <AnimalCard
-                      key={e._id}
-                      animal={e}
-                      edit={!!isPublic ? false : true}
-                    />
-                  );
-                })
-              ) : (
-                <Message>Aún no se ha agregado ningún peludo</Message>
-              )}
-          </section>
-          {!isPublic && (
-            <section>
+            ) : (
               <Button
                 type="button"
                 onClick={(e) => dispatch({ type: SHOW_MODAL })}
               >
                 Agregar peludo
               </Button>
-            </section>
-          )}
-          <StyledModal
-            show={showModal}
-            onHide={(e) => dispatch({ type: HIDE_MODAL })}
-            backdrop="static"
-            keyboard={true}
-            centered
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Agregar un nuevo peludo</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <AnimalForm update={false} />
-            </Modal.Body>
-          </StyledModal>
-        </PrincipalSection>
+            )}
+          </DescriptionContainer>
+        </InfoONG>
+        <ModalMessage
+          show={showModalDonation}
+          onHide={(e) => setModalDonation(false)}
+          backdrop="static"
+          keyboard={false}
+          centered
+        >
+          <Modal.Header>
+            <Modal.Title>¡Gracias por tu ayuda!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form>
+              <FormLabel htmlFor="donationAmount">
+                ¿Cuánto deseas donar?
+              </FormLabel>
+              <Input
+                type="number"
+                id="donationAmount"
+                name="donationAmount"
+                value={donationAmount}
+                onChange={(e) => setDonationAmount(e.target.value)}
+              />
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={(e) => setModalDonation(false)}>Cancelar</Button>
+            <Button onClick={donation} disabled={donationProcess}>
+              Pagar
+            </Button>
+          </Modal.Footer>
+        </ModalMessage>
+        <AnimalsSection>
+          {!!ong &&
+          !!ong.animals &&
+          ong.animals.length > 0 &&
+          !!ong.animals[0] ? (
+              ong.animals.map((e) => {
+                return (
+                  <AnimalCard
+                    key={e._id}
+                    animal={e}
+                    edit={!!isPublic ? false : true}
+                  />
+                );
+              })
+            ) : (
+              <Message>Aún no se ha agregado ningún peludo</Message>
+            )}
+        </AnimalsSection>
+        <StyledModal
+          show={showModal}
+          onHide={(e) => dispatch({ type: HIDE_MODAL })}
+          backdrop="static"
+          keyboard={true}
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Agregar un nuevo peludo</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <AnimalForm update={false} />
+          </Modal.Body>
+        </StyledModal>
       </StyledMain>
     </>
   );

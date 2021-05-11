@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { LinkButton } from '../LinkButton';
+import { AnimalGreetH2, PetImage, StyledArticle } from './styles';
 
 export function AnimalCard({ animal, edit }) {
   const { profilePicture, name, age, _id, sex } = animal;
@@ -9,16 +10,20 @@ export function AnimalCard({ animal, edit }) {
     time = ageYears === 1 ? 'año' : 'años';
   }
   return (
-    <article>
-      <img src={profilePicture} alt="Foto de perfil del animal" />
-      <h2>¡Hola, soy {name}!</h2>
+    <StyledArticle>
+      <PetImage src={profilePicture} alt="Foto de perfil del animal" />
+      <AnimalGreetH2>¡Hola, soy {name}!</AnimalGreetH2>
       <p>
-        Tengo {ageYears} {time} y estoy {sex === 'Macho' ? 'listo' : 'lista'}{' '}
-        para dejar huella en tu hogar.
+        Tengo{' '}
+        <strong>
+          {ageYears} {time}
+        </strong>{' '}
+        y estoy {sex === 'Macho' ? 'listo' : 'lista'} para dejar huella en tu
+        hogar.
       </p>
-      <Link to={!!edit ? `/peludo/${_id}/edit` : `/peludo/${_id}`}>
+      <LinkButton to={!!edit ? `/peludo/${_id}/edit` : `/peludo/${_id}`}>
         ¡Conoce más sobre mí!
-      </Link>
-    </article>
+      </LinkButton>
+    </StyledArticle>
   );
 }

@@ -105,7 +105,9 @@ export function AnimalProfile({ edit }) {
             <Button onClick={(e) => setShowConfirmDelete(false)}>
               Cancelar
             </Button>
-            <Button onClick={(e) => dispatch(deleteAnimal(animalId))}>Eliminar</Button>
+            <Button onClick={(e) => dispatch(deleteAnimal(animalId))}>
+              Eliminar
+            </Button>
           </Modal.Footer>
         </ModalMessage>
       </StyledMain>
