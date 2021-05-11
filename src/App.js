@@ -19,6 +19,12 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
     font-display: auto;
   }
+
+  p {
+    font-family: 'Lato';
+    font-style: italic;
+    font-weight: 400;
+  }
 `;
 
 function PrivateRoute({ children, ...rest }) {

@@ -1,18 +1,4 @@
 import styled from 'styled-components';
-import Modal from 'react-bootstrap/Modal';
-
-export const ModalValorDonacion = styled(Modal)`
-  & .modal-content {
-    text-align: center;
-    border-radius: 10px;
-  }
-  & .modal-header {
-    display: unset;
-    font-family: 'Snowy Night';
-    background-color: #227f83;
-    color: #f6f4eb;
-  }
-`;
 
 export const Banner = styled.img`
   width: 100%;
@@ -27,6 +13,11 @@ export const NombreONG = styled.h1`
   @media screen and (min-width: 768px) {
     font-size: 4vw;
   }
+`;
+
+export const PrincipalSection = styled.section`
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 `;
 
 export const InfoONG = styled.section`
@@ -49,6 +40,7 @@ export const LogoContainer = styled.div`
 
 export const StyledLogo = styled.img`
   margin: 0 auto;
+  border-radius: 10px;
 `;
 
 export const DescriptionContainer = styled.div`

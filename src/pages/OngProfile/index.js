@@ -19,11 +19,12 @@ import {
   InfoONG,
   LogoContainer,
   Message,
-  ModalValorDonacion,
   NombreONG,
+  PrincipalSection,
   StyledLogo,
 } from './styles';
 import bannerImage from './Perfil-fundación.png';
+import { ModalMessage } from '../../components/ModalMessage';
 
 export function OngProfile({ isPublic }) {
   const dispatch = useDispatch();
@@ -87,9 +88,9 @@ export function OngProfile({ isPublic }) {
   return (
     <>
       <Header />
-      {!!loading && <p>Cargando información...</p>}
       <StyledMain height={'auto'}>
-        <section>
+        {!!loading && <p>Cargando información...</p>}
+        <PrincipalSection>
           <Banner src={bannerImage} alt="Banner adopta huellas" />
           <InfoONG>
             <LogoContainer>
@@ -120,7 +121,7 @@ export function OngProfile({ isPublic }) {
               )}
             </DescriptionContainer>
           </InfoONG>
-          <ModalValorDonacion
+          <ModalMessage
             show={showModalDonation}
             onHide={(e) => setModalDonation(false)}
             backdrop="static"
@@ -150,21 +151,24 @@ export function OngProfile({ isPublic }) {
                 Pagar
               </Button>
             </Modal.Footer>
-          </ModalValorDonacion>
+          </ModalMessage>
           <section>
-            {!!ong && !!ong.animals && ong.animals.length > 0 ? (
-              ong.animals.map((e) => {
-                return (
-                  <AnimalCard
-                    key={e._id}
-                    animal={e}
-                    edit={!!isPublic ? false : true}
-                  />
-                );
-              })
-            ) : (
-              <Message>Aún no se ha agregado ningún peludo</Message>
-            )}
+            {!!ong &&
+            !!ong.animals &&
+            ong.animals.length > 0 &&
+            !!ong.animals[0] ? (
+                ong.animals.map((e) => {
+                  return (
+                    <AnimalCard
+                      key={e._id}
+                      animal={e}
+                      edit={!!isPublic ? false : true}
+                    />
+                  );
+                })
+              ) : (
+                <Message>Aún no se ha agregado ningún peludo</Message>
+              )}
           </section>
           {!isPublic && (
             <section>
@@ -189,13 +193,8 @@ export function OngProfile({ isPublic }) {
             <Modal.Body>
               <AnimalForm update={false} />
             </Modal.Body>
-            {/* <Modal.Footer>
-              <Button onClick={(e) => dispatch({ type: HIDE_MODAL })} type="button">
-                Cancelar
-              </Button>
-            </Modal.Footer> */}
           </StyledModal>
-        </section>
+        </PrincipalSection>
       </StyledMain>
     </>
   );

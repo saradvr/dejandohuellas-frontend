@@ -1,16 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
-import { getAnimal } from '../../store/animalReducer';
+import { deleteAnimal, getAnimal } from '../../store/animalReducer';
 import Modal from 'react-bootstrap/Modal';
 import { SHOW_MODAL, HIDE_MODAL } from '../../store/animalReducer';
 import { AnimalForm } from '../../components/AnimalForm';
 import { StyledMain } from '../../components/Main';
 import { StyledModal } from '../../components/ModalAnimalInfo';
+import { ModalMessage } from '../../components/ModalMessage';
 
 export function AnimalProfile({ edit }) {
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const dispatch = useDispatch();
   const { animalId } = useParams();
   useEffect(() => {
@@ -37,13 +39,12 @@ export function AnimalProfile({ edit }) {
     time = ageYears === 1 ? 'año' : 'años';
   }
 
-  if (!!error) return <p>Hubo un error, por favor intente nuevamente.</p>;
-
   return (
     <>
       <Header />
-      {!!loading && <p>Cargando información...</p>}
       <StyledMain>
+        {!!loading && <p>Cargando información...</p>}
+        {!!error && <p>Hubo un error, por favor intente nuevamente.</p>}
         <img src={profilePicture} alt="Perfil del peludo" />
         <section>
           <h2>{name}</h2>
@@ -68,6 +69,13 @@ export function AnimalProfile({ edit }) {
             </Button>
           </section>
         )}
+        {!!edit && (
+          <section>
+            <Button type="button" onClick={(e) => setShowConfirmDelete(true)}>
+              Eliminar este peludo
+            </Button>
+          </section>
+        )}
         <StyledModal
           show={showModal}
           onHide={(e) => dispatch({ type: HIDE_MODAL })}
@@ -82,6 +90,24 @@ export function AnimalProfile({ edit }) {
             <AnimalForm update={true} animalId={animalId} />
           </Modal.Body>
         </StyledModal>
+        <ModalMessage
+          show={showConfirmDelete}
+          onHide={(e) => setShowConfirmDelete(false)}
+          backdrop="static"
+          keyboard={false}
+          centered
+        >
+          <Modal.Header>
+            <Modal.Title>Confirmación</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>¿Estás seguro que deseas eliminarlo?</Modal.Body>
+          <Modal.Footer>
+            <Button onClick={(e) => setShowConfirmDelete(false)}>
+              Cancelar
+            </Button>
+            <Button onClick={(e) => dispatch(deleteAnimal(animalId))}>Eliminar</Button>
+          </Modal.Footer>
+        </ModalMessage>
       </StyledMain>
     </>
   );
