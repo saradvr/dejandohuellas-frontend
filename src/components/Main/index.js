@@ -9,4 +9,5 @@ export const StyledMain = styled.main`
   height: ${(props) => (props.height ? props.height : '100%')};
   display: flex;
   align-items: center;
+  flex-direction: column;
 `;
