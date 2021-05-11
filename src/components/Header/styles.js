@@ -1,37 +1,35 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Navbar from 'react-bootstrap/Navbar';
 
-export const MainNav = styled.section`
-  background-color: #227f83;
-  width: 100%;
-  padding: 20px;
-  text-align: center;
-
-  @media screen and (min-width: 768px) {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
+export const StyledNavBar = styled(Navbar)`
+  background-color: #227f83 !important;
+  & .nav-link {
+    font-family: 'Snowy Night';
+    color: #f6f4eb !important;
+    margin: auto 15px;
+    font-size: 20px;
   }
-`;
 
-export const NavSection = styled.nav`
-  display: none;
-
-  @media screen and (min-width: 768px) {
-    display: flex;
-    flex-direction: row;
+  & .navbar-collapse {
     justify-content: flex-end;
-    grid-column: 2;
   }
-`;
 
-export const LogoSection = styled.section`
-  grid-column: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  & .navbar-nav {
+    text-align: right;
+  }
 
-  @media screen and (min-width: 768px) {
-    grid-column: 1;
+  & .navbar-nav button {
+    padding: 0.5rem 1rem;
+    margin-right: 15px;
+    padding-right: 0;
+    align-self: flex-end;
+  }
+
+  @media screen and (min-width: 1024px) {
+    & .nav-link {
+      margin: auto 50px;
+    }
   }
 `;
 
