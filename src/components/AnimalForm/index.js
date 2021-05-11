@@ -34,12 +34,22 @@ export function AnimalForm({ update, animalId }) {
   );
   const [city, setCity] = useState(!!update ? animal.city : '');
   const [errorFile, setErrorFile] = useState('');
+  const [errorValidacion, setErrorValidacion] = useState('');
   const dispatch = useDispatch();
+
+  const { error, saving } = useSelector(({ animalReducer }) => ({
+    error: animalReducer.error,
+    saving: animalReducer.saving,
+  }));
 
   function readFile(file) {
     const reader = new FileReader();
-
-    reader.readAsDataURL(file);
+    try {
+      reader.readAsDataURL(file);
+      setErrorValidacion('');
+    } catch (error) {
+      setErrorValidacion('Error para leer la imagen.');
+    }
 
     reader.onload = (e) => setPreview(e.target.result);
 
@@ -53,6 +63,10 @@ export function AnimalForm({ update, animalId }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (age <= 0) {
+      setErrorValidacion('Ingrese una edad válida');
+      return false;
+    }
     const data = new FormData();
     data.append('name', name);
     data.append('animalType', animalType);
@@ -175,12 +189,17 @@ export function AnimalForm({ update, animalId }) {
           </ImgPreviewSection>
         </RightSection>
       </TwoSectionForm>
+      {!!errorValidacion && <p>{errorValidacion}</p>}
       <Button type="submit">
         {!!update ? 'Actualizar información' : 'Guardar peludo'}
       </Button>
       {!!errorFile && (
         <p>Hubo un error al cargar la imagen, intente de nuevo.</p>
       )}
+      {!!error && (
+        <p>Hubo un error al guardar la información, intente de nuevo.</p>
+      )}
+      {!!saving && <p>Se está guardando la información</p>}
     </form>
   );
 }

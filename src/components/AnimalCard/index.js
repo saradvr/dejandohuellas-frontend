@@ -4,7 +4,7 @@ export function AnimalCard({ animal, edit }) {
   const { profilePicture, name, age, _id, sex } = animal;
   let time = age === 1 ? 'mes' : 'meses';
   let ageYears = age;
-  if (age > 12) {
+  if (age >= 12) {
     ageYears = Math.ceil(age / 12);
     time = ageYears === 1 ? 'año' : 'años';
   }

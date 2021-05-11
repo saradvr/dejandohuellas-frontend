@@ -4,6 +4,7 @@ import { history } from '../utils/history';
 const LOADING = 'LOADING';
 const ERROR = 'ERROR';
 export const ONG_LOADED = 'ONG_LOADED';
+export const ONG_CHANGING = 'ONG_CHANGING';
 const FINISHED = 'FINISHED';
 
 export function getOng() {
@@ -75,6 +76,11 @@ export function ongReducer(state = initialState, action) {
       return {
         ...state,
         ong: action.payload,
+      };
+    case ONG_CHANGING:
+      return {
+        ...state,
+        ong: {},
       };
     case FINISHED:
       return {
