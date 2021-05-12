@@ -33,7 +33,7 @@ export function Login() {
 
   return (
     <>
-      <Header />
+      <Header fixed="top" sticky="" />
       <StyledMain>
         <ImgSection>
           <StyledTitle>¡Bienvenidos!</StyledTitle>

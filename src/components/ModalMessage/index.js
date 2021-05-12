@@ -14,8 +14,4 @@ export const ModalMessage = styled(Modal)`
     color: #f6f4eb;
     border-radius: 10px 10px 0 0;
   }
-
-  & .modal-dialog-centered {
-    max-width: 90%;
-  }
 `;

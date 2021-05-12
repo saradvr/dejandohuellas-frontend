@@ -8,7 +8,7 @@ import { useHistory } from 'react-router';
 import { FormLabel } from '../../components/FormLabel';
 import { FormSelect } from '../../components/FormSelect';
 import { StyledMain } from '../../components/Main';
-import { StyledForm } from './styles';
+import { ImgSection, StyledForm, StyledTitle } from './styles';
 
 export function Register() {
   const [name, setName] = useState('');
@@ -47,61 +47,64 @@ export function Register() {
 
   return (
     <>
-      <Header />
+      <Header fixed="top" sticky="" />
       <StyledMain>
-        <StyledForm onSubmit={handleSubmit}>
-          <FormLabel htmlFor="name">Nombre</FormLabel>
-          <Input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required={true}
-          />
-          <FormLabel htmlFor="email">Correo</FormLabel>
-          <Input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required={true}
-          />
-          <FormLabel htmlFor="password">Contraseña</FormLabel>
-          <Input
-            type="password"
-            name="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required={true}
-          />
-          <FormLabel htmlFor="confirmPass">Confirme su contraseña</FormLabel>
-          <Input
-            type="password"
-            name="confirmPass"
-            id="confirmPass"
-            value={confirmPass}
-            onChange={(e) => setConfirmPass(e.target.value)}
-            required={true}
-          />
-          <FormLabel htmlFor="userType">Tipo de usuario</FormLabel>
-          <FormSelect
-            name="userType"
-            id="userType"
-            onChange={(e) => setUserTYpe(e.target.value)}
-            required={true}
-          >
-            <option value="">Selecciona una opción</option>
-            <option value="ONG">Fundación</option>
-            <option value="Persona">Persona</option>
-          </FormSelect>
-          {!!errorPwd && <p>{errorPwd}</p>}
-          {!!error && <p>{error}</p>}
-          {!!loading && <p>{loading}</p>}
-          <Button type="submit">Registrarme</Button>
-        </StyledForm>
+        <ImgSection>
+          <StyledTitle>¡Regístrate!</StyledTitle>
+          <StyledForm onSubmit={handleSubmit}>
+            <FormLabel htmlFor="name">Nombre</FormLabel>
+            <Input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required={true}
+            />
+            <FormLabel htmlFor="email">Correo</FormLabel>
+            <Input
+              type="email"
+              name="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required={true}
+            />
+            <FormLabel htmlFor="password">Contraseña</FormLabel>
+            <Input
+              type="password"
+              name="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required={true}
+            />
+            <FormLabel htmlFor="confirmPass">Confirme su contraseña</FormLabel>
+            <Input
+              type="password"
+              name="confirmPass"
+              id="confirmPass"
+              value={confirmPass}
+              onChange={(e) => setConfirmPass(e.target.value)}
+              required={true}
+            />
+            <FormLabel htmlFor="userType">Tipo de usuario</FormLabel>
+            <FormSelect
+              name="userType"
+              id="userType"
+              onChange={(e) => setUserTYpe(e.target.value)}
+              required={true}
+            >
+              <option value="">Selecciona una opción</option>
+              <option value="ONG">Fundación</option>
+              <option value="Persona">Persona</option>
+            </FormSelect>
+            {!!errorPwd && <p>{errorPwd}</p>}
+            {!!error && <p>{error}</p>}
+            {!!loading && <p>{loading}</p>}
+            <Button type="submit">Registrarme</Button>
+          </StyledForm>
+        </ImgSection>
       </StyledMain>
     </>
   );
