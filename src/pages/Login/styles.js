@@ -7,19 +7,20 @@ export const ImgSection = styled.section`
   display: grid;
   grid-template-columns: 1fr;
   text-align: center;
+  margin-top: 4%;
 
   @media screen and (min-width: 768px) {
     background-image: url(${fondo});
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: -400px;
     grid-template-columns: 1fr 1fr;
     justify-content: center;
     width: 100%;
+    background-position: right;
   }
 
-  @media screen and (min-width: 1024px) {
-    background-position: right;
+  @media screen and (min-width: 1440px) {
+    margin-top: 2%;
   }
 `;
 

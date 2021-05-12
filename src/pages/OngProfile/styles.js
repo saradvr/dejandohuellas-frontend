@@ -45,6 +45,7 @@ export const LogoContainer = styled.div`
   padding: 20px;
   display: flex;
   align-items: center;
+  margin: auto;
   @media screen and (min-width: 768px) {
     grid-column: 1;
   }
@@ -53,6 +54,9 @@ export const LogoContainer = styled.div`
 export const StyledLogo = styled.img`
   margin: 0 auto;
   border-radius: 10px;
+  width: 100%;
+  max-width: 260px;
+  box-shadow: black 0px 0px 15px 0px;
 `;
 
 export const DescriptionContainer = styled.div`
@@ -61,15 +65,14 @@ export const DescriptionContainer = styled.div`
   align-items: center;
   flex-direction: column;
   text-align: left;
+  width: 90%;
+  margin: auto;
   @media screen and (min-width: 768px) {
     grid-column: 2;
 
     & button {
       margin-right: 0;
     }
-  }
-  @media screen and (min-width: 1024px) {
-    padding: 20px 50px 20px 20px;
   }
 `;
 

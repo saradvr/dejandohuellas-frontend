@@ -7,9 +7,22 @@ import { deleteAnimal, getAnimal } from '../../store/animalReducer';
 import Modal from 'react-bootstrap/Modal';
 import { SHOW_MODAL, HIDE_MODAL } from '../../store/animalReducer';
 import { AnimalForm } from '../../components/AnimalForm';
-import { StyledMain } from '../../components/Main';
 import { StyledModal } from '../../components/ModalAnimalInfo';
 import { ModalMessage } from '../../components/ModalMessage';
+import banner from './Perfil-animal.png';
+import {
+  InformationSection,
+  ImageContainer,
+  StyledProfilePicture,
+  PrincipalInformationDiv,
+  NameH2,
+  ItemTitleP,
+  GroupInfoP,
+  HistoryDiv,
+  ButtonsDiv,
+  MainProfilePet,
+  Banner,
+} from './styles';
 
 export function AnimalProfile({ edit }) {
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
@@ -41,41 +54,62 @@ export function AnimalProfile({ edit }) {
 
   return (
     <>
-      <Header />
-      <StyledMain>
+      <Header sticky={'top'} />
+      <MainProfilePet height={'auto'}>
         {!!loading && <p>Cargando información...</p>}
         {!!error && <p>Hubo un error, por favor intente nuevamente.</p>}
-        <img src={profilePicture} alt="Perfil del peludo" />
-        <section>
-          <h2>{name}</h2>
-          <h3>
-            Edad: {ageYears} {time}
-          </h3>
-          <h3>Tamaño: {size}</h3>
-          <h3>Sexo: {sex}</h3>
-          <h3>ONG: {!!ong && ong.user.name}</h3>
-          <h3>Ciudad: {city}</h3>
-        </section>
-        <section>
-          <p>{history}</p>
-        </section>
-        {!!edit && (
-          <section>
-            <Button
-              type="button"
-              onClick={(e) => dispatch({ type: SHOW_MODAL })}
-            >
-              Actualizar información
-            </Button>
-          </section>
-        )}
-        {!!edit && (
-          <section>
-            <Button type="button" onClick={(e) => setShowConfirmDelete(true)}>
-              Eliminar este peludo
-            </Button>
-          </section>
-        )}
+        <Banner src={banner} alt="Banner del perfil del animal" />
+        <InformationSection>
+          <ImageContainer>
+            <StyledProfilePicture
+              src={profilePicture}
+              alt="Perfil del peludo"
+            />
+          </ImageContainer>
+          <PrincipalInformationDiv>
+            <NameH2>{name}</NameH2>
+            <GroupInfoP>
+              <ItemTitleP>Edad: </ItemTitleP>
+              {ageYears} {time}
+            </GroupInfoP>
+            <GroupInfoP>
+              <ItemTitleP>Tamaño: </ItemTitleP>
+              {size}
+            </GroupInfoP>
+            <GroupInfoP>
+              <ItemTitleP>Sexo: </ItemTitleP>
+              {sex}
+            </GroupInfoP>
+            <GroupInfoP>
+              <ItemTitleP>Ciudad: </ItemTitleP>
+              {city}
+            </GroupInfoP>
+            <GroupInfoP>
+              <ItemTitleP>Fundación: </ItemTitleP>
+              {!!ong && ong.user.name}
+            </GroupInfoP>
+          </PrincipalInformationDiv>
+          <HistoryDiv>
+            <ItemTitleP>Un poco de mi historia...</ItemTitleP>
+            <p>{history}</p>
+            {!!edit && (
+              <ButtonsDiv>
+                <Button
+                  type="button"
+                  onClick={(e) => dispatch({ type: SHOW_MODAL })}
+                >
+                  Actualizar información
+                </Button>
+                <Button
+                  type="button"
+                  onClick={(e) => setShowConfirmDelete(true)}
+                >
+                  Eliminar este peludo
+                </Button>
+              </ButtonsDiv>
+            )}
+          </HistoryDiv>
+        </InformationSection>
         <StyledModal
           show={showModal}
           onHide={(e) => dispatch({ type: HIDE_MODAL })}
@@ -100,7 +134,9 @@ export function AnimalProfile({ edit }) {
           <Modal.Header>
             <Modal.Title>Confirmación</Modal.Title>
           </Modal.Header>
-          <Modal.Body>¿Estás seguro que deseas eliminarlo?</Modal.Body>
+          <Modal.Body>
+            <p>¿Estás seguro que deseas eliminarlo?</p>
+          </Modal.Body>
           <Modal.Footer>
             <Button onClick={(e) => setShowConfirmDelete(false)}>
               Cancelar
@@ -110,7 +146,7 @@ export function AnimalProfile({ edit }) {
             </Button>
           </Modal.Footer>
         </ModalMessage>
-      </StyledMain>
+      </MainProfilePet>
     </>
   );
 }
