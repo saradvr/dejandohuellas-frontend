@@ -21,7 +21,7 @@ import {
   HistoryDiv,
   ButtonsDiv,
   MainProfilePet,
-  Banner
+  Banner,
 } from './styles';
 
 export function AnimalProfile({ edit }) {
@@ -54,7 +54,7 @@ export function AnimalProfile({ edit }) {
 
   return (
     <>
-      <Header sticky={'top'}/>
+      <Header sticky={'top'} />
       <MainProfilePet height={'auto'}>
         {!!loading && <p>Cargando información...</p>}
         {!!error && <p>Hubo un error, por favor intente nuevamente.</p>}
@@ -134,7 +134,9 @@ export function AnimalProfile({ edit }) {
           <Modal.Header>
             <Modal.Title>Confirmación</Modal.Title>
           </Modal.Header>
-          <Modal.Body><p>¿Estás seguro que deseas eliminarlo?</p></Modal.Body>
+          <Modal.Body>
+            <p>¿Estás seguro que deseas eliminarlo?</p>
+          </Modal.Body>
           <Modal.Footer>
             <Button onClick={(e) => setShowConfirmDelete(false)}>
               Cancelar
