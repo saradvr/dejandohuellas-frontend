@@ -25,6 +25,7 @@ export const AnimalsSection = styled.section`
   @media screen and (min-width: 768px) {
     flex-direction: row;
     flex-wrap: wrap;
+    margin-bottom: 30px;
   }
 `;
 
@@ -66,6 +67,9 @@ export const DescriptionContainer = styled.div`
     & button {
       margin-right: 0;
     }
+  }
+  @media screen and (min-width: 1024px) {
+    padding: 20px 50px 20px 20px;
   }
 `;
 

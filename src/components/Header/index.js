@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { HeaderButton, StyledNavBar } from './styles';
 
-export function Header() {
+export function Header({ fixed, sticky }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -16,7 +16,13 @@ export function Header() {
 
   return (
     <>
-      <StyledNavBar collapseOnSelect expand="sm" sticky="top" variant="dark">
+      <StyledNavBar
+        collapseOnSelect
+        expand="sm"
+        fixed={fixed}
+        sticky={sticky}
+        variant="dark"
+      >
         <StyledNavBar.Brand href="/">
           <img
             src="https://dbdzm869oupei.cloudfront.net/img/sticker/preview/9393.png"
