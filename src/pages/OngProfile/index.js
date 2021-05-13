@@ -25,6 +25,7 @@ import {
 } from './styles';
 import bannerImage from './Perfil-fundación.png';
 import { ModalMessage } from '../../components/ModalMessage';
+import { LinkButton } from '../../components/LinkButton';
 
 export function OngProfile({ isPublic }) {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export function OngProfile({ isPublic }) {
   const [donationProcess, setDonationProcess] = useState(false);
   const [showModalDonation, setModalDonation] = useState(false);
   const [donationAmount, setDonationAmount] = useState('');
+  const [donationEmail, setDonationEmail] = useState('');
 
   useEffect(() => {
     !!isPublic ? dispatch(getPublicOng(ongId)) : dispatch(getOng());
@@ -69,9 +71,11 @@ export function OngProfile({ isPublic }) {
       tax_base: '0',
 
       invoice: '1234123',
+      extra1: ong._id,
 
       response: `${process.env.REACT_APP_BASE_URL}/transaction-result`,
 
+      email_billing: donationEmail,
       type_doc_billing: 'CC',
 
       methodsDisable: ['CASH', 'SP', 'PSE', 'DP'],
@@ -116,12 +120,15 @@ export function OngProfile({ isPublic }) {
                 Hacer donación
               </Button>
             ) : (
-              <Button
-                type="button"
-                onClick={(e) => dispatch({ type: SHOW_MODAL })}
-              >
-                Agregar peludo
-              </Button>
+              <div>
+                <Button
+                  type="button"
+                  onClick={(e) => dispatch({ type: SHOW_MODAL })}
+                >
+                  Agregar peludo
+                </Button>
+                <LinkButton to={'/transactions'}>Ver transacciones</LinkButton>
+              </div>
             )}
           </DescriptionContainer>
         </InfoONG>
@@ -137,6 +144,14 @@ export function OngProfile({ isPublic }) {
           </Modal.Header>
           <Modal.Body>
             <form>
+              <FormLabel htmlFor="donationEmail">Escribe tu correo</FormLabel>
+              <Input
+                type="text"
+                id="donationEmail"
+                name="donationEmail"
+                value={donationEmail}
+                onChange={(e) => setDonationEmail(e.target.value)}
+              />
               <FormLabel htmlFor="donationAmount">
                 ¿Cuánto deseas donar?
               </FormLabel>
