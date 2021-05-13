@@ -4,11 +4,13 @@ import logger from 'redux-logger';
 import { userReducer } from './userReducer';
 import { animalReducer } from './animalReducer';
 import { ongReducer } from './ongReducer';
+import { transactionReducer } from './transactionReducer';
 
 const appReducer = combineReducers({
   userReducer,
   animalReducer,
   ongReducer,
+  transactionReducer,
 });
 
 const rootReducer = (state, action) => {

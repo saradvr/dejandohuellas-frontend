@@ -29,6 +29,7 @@ export function createAnimal(form) {
       });
       dispatch({ type: SUCCESS_ANIMAL, payload: data.animal });
       dispatch({ type: ONG_LOADED, payload: data.ong });
+      dispatch({ type: HIDE_MODAL });
     } catch (error) {
       dispatch({ type: ERROR, payload: error.message });
       if (!!error.response && error.response.request.status === 401) {
@@ -58,6 +59,7 @@ export function updateAnimal(form, animalId) {
         data: form,
       });
       dispatch({ type: SUCCESS_ANIMAL, payload: data.animal });
+      dispatch({ type: HIDE_MODAL });
     } catch (error) {
       dispatch({ type: ERROR, payload: error.message });
       if (!!error.response && error.response.request.status === 401) {

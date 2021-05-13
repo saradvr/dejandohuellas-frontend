@@ -11,6 +11,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { AnimalProfile } from './pages/AnimalProfile';
 import { createGlobalStyle } from 'styled-components';
 import SnowyNight from './components/Tipografia/Snowy-Night.ttf';
+import { TransactionResult } from './pages/TransactionResult';
+import { OngTransactions } from './pages/OngTransactions';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -77,6 +79,12 @@ function App() {
         </Route>
         <PrivateONGRoute exact path="/peludo/:animalId/edit">
           <AnimalProfile edit={true} />
+        </PrivateONGRoute>
+        <Route exact path="/transaction-result">
+          <TransactionResult />
+        </Route>
+        <PrivateONGRoute exact path="/transactions">
+          <OngTransactions />
         </PrivateONGRoute>
       </Switch>
     </Router>

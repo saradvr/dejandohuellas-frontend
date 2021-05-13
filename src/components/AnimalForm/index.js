@@ -2,11 +2,7 @@ import { Button } from '../Button';
 import { useState } from 'react';
 import { Input } from '../Input';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  createAnimal,
-  HIDE_MODAL,
-  updateAnimal,
-} from '../../store/animalReducer';
+import { createAnimal, updateAnimal } from '../../store/animalReducer';
 import { FormLabel } from '../FormLabel';
 import { FormSelect } from '../FormSelect';
 import { StyledTextArea } from '../FormTextArea';
@@ -83,7 +79,6 @@ export function AnimalForm({ update, animalId }) {
     } else {
       dispatch(updateAnimal(data, animalId));
     }
-    dispatch({ type: HIDE_MODAL });
   }
 
   return (
