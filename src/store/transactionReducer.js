@@ -18,6 +18,7 @@ export function saveTransaction(result) {
         url: '/transactions/create',
         data: {
           ong: result.x_extra1,
+          email: result.x_extra2,
           refPago: result.x_ref_payco,
           date: result.x_fecha_transaccion,
           amount: result.x_amount,
@@ -26,7 +27,11 @@ export function saveTransaction(result) {
       });
       dispatch({ type: SUCCESS, payload: data.transaction });
     } catch (error) {
-      dispatch({ type: ERROR, payload: error.response.data.message });
+      if (!!error.response) {
+        dispatch({ type: ERROR, payload: error.response.data.message });
+      } else {
+        dispatch({ type: ERROR, payload: 'Error para cargar el resultado.' });
+      }
     } finally {
       dispatch({ type: FINISHED });
     }

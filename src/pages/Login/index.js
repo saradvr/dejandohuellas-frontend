@@ -8,6 +8,7 @@ import { useHistory } from 'react-router';
 import { StyledMain } from '../../components/Main';
 import { FormLabel } from '../../components/FormLabel';
 import { ImgSection, LoginForm, StyledTitle } from './styles';
+import { LoadingPawPrints } from '../../components/LoadingPawPrints';
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -57,7 +58,7 @@ export function Login() {
               required={true}
             />
             {!!error && <p>{error}</p>}
-            {!!loading && <p>{loading}</p>}
+            {!!loading && <LoadingPawPrints show={loading} />}
             <Button type="submit">Iniciar Sesión</Button>
           </LoginForm>
         </ImgSection>

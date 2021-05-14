@@ -1,8 +1,8 @@
 import { StyledButton } from './styles';
 
-export function Button({ type, children, onClick }) {
+export function Button({ type, children, onClick, disabled }) {
   return (
-    <StyledButton type={type} onClick={onClick}>
+    <StyledButton type={type} onClick={onClick} disabled={disabled}>
       {children}
     </StyledButton>
   );

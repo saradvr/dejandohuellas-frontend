@@ -6,6 +6,9 @@ export const ModalMessage = styled(Modal)`
     text-align: center;
     border-radius: 10px;
     border: none;
+    & input {
+      text-align: center;
+    }
   }
   & .modal-header {
     display: unset;

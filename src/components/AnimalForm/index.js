@@ -53,8 +53,11 @@ export function AnimalForm({ update, animalId }) {
   }
 
   function handleChange(e) {
-    readFile(e.target.files[0]);
-    setProfilePicture(e.target.files);
+    const file = e.target.files[0];
+    if (file) {
+      readFile(file);
+      setProfilePicture(e.target.files);
+    }
   }
 
   function handleSubmit(e) {
