@@ -26,6 +26,7 @@ import {
 import bannerImage from './Perfil-fundación.png';
 import { ModalMessage } from '../../components/ModalMessage';
 import { LinkButton } from '../../components/LinkButton';
+import { LoadingPawPrints } from '../../components/LoadingPawPrints';
 
 export function OngProfile({ isPublic }) {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ export function OngProfile({ isPublic }) {
   const [showModalDonation, setModalDonation] = useState(false);
   const [donationAmount, setDonationAmount] = useState('');
   const [donationEmail, setDonationEmail] = useState('');
+  const [errorValidation, setErrorValidation] = useState('');
 
   useEffect(() => {
     !!isPublic ? dispatch(getPublicOng(ongId)) : dispatch(getOng());
@@ -49,6 +51,13 @@ export function OngProfile({ isPublic }) {
   );
 
   function donation(e) {
+    e.preventDefault();
+    setErrorValidation('');
+    if (donationAmount < 5000) {
+      setErrorValidation('La cantidad debe ser mayor a 5000 COP');
+      return;
+    }
+
     setDonationProcess(true);
 
     const handler = window.ePayco.checkout.configure({
@@ -72,6 +81,7 @@ export function OngProfile({ isPublic }) {
 
       invoice: '1234123',
       extra1: ong._id,
+      extra2: donationEmail,
 
       response: `${process.env.REACT_APP_BASE_URL}/transaction-result`,
 
@@ -84,15 +94,15 @@ export function OngProfile({ isPublic }) {
 
     setTimeout(() => {
       setDonationProcess(false);
-    }, 4000);
+    }, 5000);
   }
 
   return (
     <>
       <Header />
       <StyledMain height={'auto'}>
-        {!!loading && <p>Cargando información...</p>}
-        {!!error && <Message>Algo salió mal, intenta nuevamente</Message>}
+        {!!loading && <LoadingPawPrints show={loading} />}
+        {!!error && <Message>Error al cargar, intenta nuevamente.</Message>}
         <Banner src={bannerImage} alt="Banner adopta huellas" />
         <InfoONG>
           <LogoContainer>
@@ -142,14 +152,15 @@ export function OngProfile({ isPublic }) {
           <Modal.Header>
             <Modal.Title>¡Gracias por tu ayuda!</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <form>
+          <form onSubmit={donation}>
+            <Modal.Body>
               <FormLabel htmlFor="donationEmail">Escribe tu correo</FormLabel>
               <Input
                 type="text"
                 id="donationEmail"
                 name="donationEmail"
                 value={donationEmail}
+                required
                 onChange={(e) => setDonationEmail(e.target.value)}
               />
               <FormLabel htmlFor="donationAmount">
@@ -160,16 +171,25 @@ export function OngProfile({ isPublic }) {
                 id="donationAmount"
                 name="donationAmount"
                 value={donationAmount}
+                min="1"
+                required
                 onChange={(e) => setDonationAmount(e.target.value)}
               />
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={(e) => setModalDonation(false)}>Cancelar</Button>
-            <Button onClick={donation} disabled={donationProcess}>
-              Pagar
-            </Button>
-          </Modal.Footer>
+              {!!errorValidation && <p>{errorValidation}</p>}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                type="button"
+                onClick={(e) => setModalDonation(false)}
+                disabled={donationProcess}
+              >
+                Cancelar
+              </Button>
+              <Button type="submit" disabled={donationProcess}>
+                Donar
+              </Button>
+            </Modal.Footer>
+          </form>
         </ModalMessage>
         <AnimalsSection>
           {!!ong &&

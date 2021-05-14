@@ -10,7 +10,6 @@ const FINISHED = 'FINISHED';
 export function getOng() {
   return async function (dispatch) {
     dispatch({ type: LOADING });
-    dispatch({ type: ERROR, payload: '' });
     try {
       const token = localStorage.getItem('token');
       const { data } = await axios({
@@ -38,7 +37,6 @@ export function getOng() {
 export function getPublicOng(ongId) {
   return async function (dispatch) {
     dispatch({ type: LOADING });
-    dispatch({ type: ERROR, payload: '' });
     try {
       const { data } = await axios({
         method: 'GET',
@@ -66,6 +64,7 @@ export function ongReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        error: null,
       };
     case ERROR:
       return {

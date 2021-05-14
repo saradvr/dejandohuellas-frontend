@@ -23,6 +23,7 @@ import {
   MainProfilePet,
   Banner,
 } from './styles';
+import { LoadingPawPrints } from '../../components/LoadingPawPrints';
 
 export function AnimalProfile({ edit }) {
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
@@ -56,8 +57,13 @@ export function AnimalProfile({ edit }) {
     <>
       <Header sticky={'top'} />
       <MainProfilePet height={'auto'}>
-        {!!loading && <p>Cargando información...</p>}
-        {!!error && <p>Hubo un error, por favor intente nuevamente.</p>}
+        {!!loading && <LoadingPawPrints show={loading} />}
+        {!!error && (
+          <p>
+            Hubo un error al cargar la información, por favor intente
+            nuevamente.
+          </p>
+        )}
         <Banner src={banner} alt="Banner del perfil del animal" />
         <InformationSection>
           <ImageContainer>

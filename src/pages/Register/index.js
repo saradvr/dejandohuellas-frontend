@@ -9,6 +9,7 @@ import { FormLabel } from '../../components/FormLabel';
 import { FormSelect } from '../../components/FormSelect';
 import { StyledMain } from '../../components/Main';
 import { ImgSection, StyledForm, StyledTitle } from './styles';
+import { LoadingPawPrints } from '../../components/LoadingPawPrints';
 
 export function Register() {
   const [name, setName] = useState('');
@@ -101,7 +102,7 @@ export function Register() {
             </FormSelect>
             {!!errorPwd && <p>{errorPwd}</p>}
             {!!error && <p>{error}</p>}
-            {!!loading && <p>{loading}</p>}
+            {!!loading && <LoadingPawPrints show={loading} />}
             <Button type="submit">Registrarme</Button>
           </StyledForm>
         </ImgSection>

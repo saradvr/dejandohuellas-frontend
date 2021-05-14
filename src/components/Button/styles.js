@@ -19,6 +19,10 @@ export const StyledButton = styled.button`
     background-color: #85c7b5;
   }
 
+  &:disabled {
+    background-color: #85c7b5;
+  }
+
   @media screen and (min-width: 768px) {
     width: 200px;
   }
