@@ -22,6 +22,7 @@ import {
   Message,
   NombreONG,
   StyledLogo,
+  ButtonsDiv
 } from './styles';
 import bannerImage from './Perfil-fundación.png';
 import { ModalMessage } from '../../components/ModalMessage';
@@ -130,7 +131,7 @@ export function OngProfile({ isPublic }) {
                 Hacer donación
               </Button>
             ) : (
-              <div>
+              <ButtonsDiv>
                 <Button
                   type="button"
                   onClick={(e) => dispatch({ type: SHOW_MODAL })}
@@ -138,7 +139,7 @@ export function OngProfile({ isPublic }) {
                   Agregar peludo
                 </Button>
                 <LinkButton to={'/transactions'}>Ver transacciones</LinkButton>
-              </div>
+              </ButtonsDiv>
             )}
           </DescriptionContainer>
         </InfoONG>

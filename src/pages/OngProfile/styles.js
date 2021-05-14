@@ -89,3 +89,15 @@ export const Message = styled.p`
   font-style: italic;
   font-size: 18px;
 `;
+
+export const ButtonsDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 425px) {
+    flex-direction: row;
+    justify-content: space-around;
+    & button {
+      margin: 20px 10px;
+    }
+  }
+`;

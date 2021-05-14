@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { history } from '../utils/history';
-const LOADING = 'LOADING';
+const LOADING_USER = 'LOADING_USER';
 const DEFINE_USER = 'DEFINE_USER';
 const USER_ERROR = 'USER_ERROR';
 const USER_FINISHED = 'USER_FINISHED';
+export const INITIAL_STATE = 'INITIAL_STATE';
 
 export function createUser(name, email, password, userType) {
   return async function (dispatch) {
-    dispatch({ type: LOADING });
-    dispatch({ type: USER_ERROR, payload: '' });
+    dispatch({ type: LOADING_USER });
     try {
       const { data } = await axios({
         method: 'POST',
@@ -24,7 +24,7 @@ export function createUser(name, email, password, userType) {
       dispatch({ type: DEFINE_USER, payload: data.user });
       localStorage.setItem('token', data.token);
       localStorage.setItem('userType', userType);
-      history.push('/profile');
+      history.push('/');
     } catch (error) {
       if (!!error && !!error.response.data.error.errors.email.message) {
         dispatch({
@@ -42,8 +42,7 @@ export function createUser(name, email, password, userType) {
 
 export function login(email, password) {
   return async function (dispatch) {
-    dispatch({ type: LOADING });
-    dispatch({ type: USER_ERROR, payload: '' });
+    dispatch({ type: LOADING_USER });
     try {
       const { data } = await axios({
         method: 'POST',
@@ -74,10 +73,15 @@ const initialState = {
 
 export function userReducer(state = initialState, action) {
   switch (action.type) {
-    case LOADING:
+    case INITIAL_STATE:
+      return {
+        state: initialState
+      };
+    case LOADING_USER:
       return {
         ...state,
         loading: true,
+        error: null,
       };
     case DEFINE_USER:
       return {

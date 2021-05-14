@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { history } from '../utils/history';
 
-const LOADING = 'LOADING';
+const LOADING_ONG = 'LOADING_ONG';
 const ERROR = 'ERROR';
 export const ONG_LOADED = 'ONG_LOADED';
 export const ONG_CHANGING = 'ONG_CHANGING';
@@ -9,7 +9,7 @@ const FINISHED = 'FINISHED';
 
 export function getOng() {
   return async function (dispatch) {
-    dispatch({ type: LOADING });
+    dispatch({ type: LOADING_ONG });
     try {
       const token = localStorage.getItem('token');
       const { data } = await axios({
@@ -36,7 +36,7 @@ export function getOng() {
 
 export function getPublicOng(ongId) {
   return async function (dispatch) {
-    dispatch({ type: LOADING });
+    dispatch({ type: LOADING_ONG });
     try {
       const { data } = await axios({
         method: 'GET',
@@ -60,7 +60,7 @@ const initialState = {
 
 export function ongReducer(state = initialState, action) {
   switch (action.type) {
-    case LOADING:
+    case LOADING_ONG:
       return {
         ...state,
         loading: true,

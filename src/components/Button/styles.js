@@ -21,6 +21,7 @@ export const StyledButton = styled.button`
 
   &:disabled {
     background-color: #85c7b5;
+    cursor: wait;
   }
 
   @media screen and (min-width: 768px) {

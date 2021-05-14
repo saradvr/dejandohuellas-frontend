@@ -54,14 +54,17 @@ export function getTransactions(params) {
       });
       dispatch({ type: SUCCESS_TRANSACTIONS, payload: data.transactions });
     } catch (error) {
-      dispatch({ type: ERROR, payload: error.response.data.message });
-      if (
-        error.response !== undefined &&
-        error.response.request.status === 401
-      ) {
-        localStorage.removeItem('token');
-        alert('Su sesión expiró, ingrese nuevamente.');
-        history.push('/entrar');
+      if (!!error.response) {
+        dispatch({ type: ERROR, payload: error.response.data.message });
+        if (
+          error.response.request.status === 401
+        ) {
+          localStorage.clear();
+          alert('Su sesión expiró, ingrese nuevamente.');
+          history.push('/entrar');
+        }
+      } else {
+        dispatch({ type: ERROR, payload: 'Error para cargar la información.' });
       }
     } finally {
       dispatch({ type: FINISHED });
