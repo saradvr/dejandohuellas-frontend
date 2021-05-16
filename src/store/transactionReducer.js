@@ -56,9 +56,7 @@ export function getTransactions(params) {
     } catch (error) {
       if (!!error.response) {
         dispatch({ type: ERROR, payload: error.response.data.message });
-        if (
-          error.response.request.status === 401
-        ) {
+        if (error.response.request.status === 401) {
           localStorage.clear();
           alert('Su sesión expiró, ingrese nuevamente.');
           history.push('/entrar');

@@ -22,7 +22,7 @@ import {
   Message,
   NombreONG,
   StyledLogo,
-  ButtonsDiv
+  ButtonsDiv,
 } from './styles';
 import bannerImage from './Perfil-fundación.png';
 import { ModalMessage } from '../../components/ModalMessage';

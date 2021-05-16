@@ -13,6 +13,7 @@ import { createGlobalStyle } from 'styled-components';
 import SnowyNight from './components/Tipografia/Snowy-Night.ttf';
 import { TransactionResult } from './pages/TransactionResult';
 import { OngTransactions } from './pages/OngTransactions';
+import { AdoptionRequest } from './pages/AdoptionRequest';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -34,8 +35,17 @@ function PrivateRoute({ children, ...rest }) {
   return (
     <Route
       {...rest}
-      render={() => {
-        return token ? children : <Redirect to="/entrar" />;
+      render={({ location }) => {
+        return !!token ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/entrar',
+              state: { from: location },
+            }}
+          />
+        );
       }}
     />
   );
@@ -86,6 +96,9 @@ function App() {
         <PrivateONGRoute exact path="/transactions">
           <OngTransactions />
         </PrivateONGRoute>
+        <PrivateRoute exact path="/peludo/:animalId/adopt">
+          <AdoptionRequest />
+        </PrivateRoute>
       </Switch>
     </Router>
   );

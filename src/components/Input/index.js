@@ -1,6 +1,6 @@
 import { StyledInput } from './styles';
 
-export function Input({ type, name, id, value, onChange, required }) {
+export function Input({ type, name, id, value, onChange, required, pattern }) {
   return (
     <StyledInput
       type={type}
@@ -9,6 +9,7 @@ export function Input({ type, name, id, value, onChange, required }) {
       required={required}
       value={value}
       onChange={onChange}
+      pattern={pattern}
     />
   );
 }

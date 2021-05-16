@@ -4,27 +4,38 @@ import { Header } from '../../components/Header';
 import { LoadingPawPrints } from '../../components/LoadingPawPrints';
 import { StyledMain } from '../../components/Main';
 import { getTransactions } from '../../store/transactionReducer';
-import { FiltersSection, LabelStatus, StatusSelect, StyledTable, StyledTitle, TableDiv } from './styles';
+import {
+  FiltersSection,
+  LabelStatus,
+  StatusSelect,
+  StyledTable,
+  StyledTitle,
+  TableDiv,
+} from './styles';
 
 export function OngTransactions() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTransactions());
   }, [dispatch]);
-  const { transactions, loading, error } = useSelector(({ transactionReducer }) => ({
-    transactions: transactionReducer.transactions,
-    loading: transactionReducer.loading,
-    error: transactionReducer.error,
-  }));
+  const { transactions, loading, error } = useSelector(
+    ({ transactionReducer }) => ({
+      transactions: transactionReducer.transactions,
+      loading: transactionReducer.loading,
+      error: transactionReducer.error,
+    })
+  );
   return (
     <>
-      <Header fixed='top' />
+      <Header fixed="top" />
       {!!loading && <LoadingPawPrints show={loading} />}
-      <StyledMain justify='center'>
+      <StyledMain justify="center">
         {!!error && <p>{error}</p>}
         <StyledTitle>Mis transacciones</StyledTitle>
         <FiltersSection>
-          <LabelStatus htmlFor="transactionsFilter">Filtre según estado de la transacción: </LabelStatus>
+          <LabelStatus htmlFor="transactionsFilter">
+            Filtre según estado de la transacción:{' '}
+          </LabelStatus>
           <StatusSelect
             name="transactionsFilter"
             id="transactionsFilter"
@@ -51,18 +62,26 @@ export function OngTransactions() {
               </tr>
             </thead>
             <tbody>
-              {!!transactions && transactions.length > 0 && transactions.map((transaction, i) => {
-                return (
-                  <tr key={transaction._id}>
-                    <td>{i+1}</td>
-                    <td>{transaction.refPago}</td>
-                    <td>{transaction.date}</td>
-                    <td>{transaction.email}</td>
-                    <td>${new Intl.NumberFormat('co-CO', { style: 'currency', currency: 'COP' }).format(transaction.amount)}</td>
-                    <td>{transaction.status}</td>
-                  </tr>
-                );
-              })}
+              {!!transactions &&
+                transactions.length > 0 &&
+                transactions.map((transaction, i) => {
+                  return (
+                    <tr key={transaction._id}>
+                      <td>{i + 1}</td>
+                      <td>{transaction.refPago}</td>
+                      <td>{transaction.date}</td>
+                      <td>{transaction.email}</td>
+                      <td>
+                        $
+                        {new Intl.NumberFormat('co-CO', {
+                          style: 'currency',
+                          currency: 'COP',
+                        }).format(transaction.amount)}
+                      </td>
+                      <td>{transaction.status}</td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </StyledTable>
         </TableDiv>
