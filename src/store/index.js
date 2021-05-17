@@ -5,12 +5,16 @@ import { userReducer } from './userReducer';
 import { animalReducer } from './animalReducer';
 import { ongReducer } from './ongReducer';
 import { transactionReducer } from './transactionReducer';
+import { adoptionReducer } from './adoptionReducer';
+import { personReducer } from './personReducer';
 
 const appReducer = combineReducers({
   userReducer,
   animalReducer,
   ongReducer,
   transactionReducer,
+  adoptionReducer,
+  personReducer,
 });
 
 const rootReducer = (state, action) => {

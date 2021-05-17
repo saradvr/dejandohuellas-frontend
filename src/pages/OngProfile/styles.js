@@ -88,6 +88,7 @@ export const Message = styled.p`
   font-weight: 400;
   font-style: italic;
   font-size: 18px;
+  margin-bottom: 50px;
 `;
 
 export const ButtonsDiv = styled.div`

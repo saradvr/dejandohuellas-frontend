@@ -78,9 +78,9 @@ function App() {
         <Route exact path="/entrar">
           <Login />
         </Route>
-        <PrivateRoute exact path="/perfil">
+        <PrivateONGRoute exact path="/perfil">
           <UserProfile />
-        </PrivateRoute>
+        </PrivateONGRoute>
         <Route exact path="/ong/:ongId">
           <OngProfile isPublic={true} />
         </Route>

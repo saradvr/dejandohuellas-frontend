@@ -8,7 +8,7 @@ const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 const REQUESTS_SUCCESS = 'REQUESTS_SUCCESS';
 const FINISHED_REQUEST = 'FINISHED_REQUEST';
 
-export function createRequest(animalId, ongId, message) {
+export function createRequest(animalId, ongId, message, cb) {
   return async function (dispatch) {
     dispatch({ type: SAVING_REQUEST });
     try {
@@ -28,6 +28,7 @@ export function createRequest(animalId, ongId, message) {
         },
       });
       dispatch({ type: REQUEST_SUCCESS, payload: data.request });
+      cb();
     } catch (error) {
       if (!!error.response) {
         dispatch({ type: ERROR_REQUEST, payload: error.response.data.message });
