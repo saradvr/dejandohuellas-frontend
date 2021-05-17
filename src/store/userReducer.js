@@ -40,7 +40,7 @@ export function createUser(name, email, password, userType) {
   };
 }
 
-export function login(email, password) {
+export function login(email, password, referrer) {
   return async function (dispatch) {
     dispatch({ type: LOADING_USER });
     try {
@@ -56,7 +56,7 @@ export function login(email, password) {
       dispatch({ type: DEFINE_USER, payload: data.user });
       localStorage.setItem('token', data.token);
       localStorage.setItem('userType', data.userType);
-      history.push('/');
+      referrer();
     } catch (error) {
       dispatch({ type: USER_ERROR, payload: error.response.data.message });
     } finally {
@@ -75,7 +75,7 @@ export function userReducer(state = initialState, action) {
   switch (action.type) {
     case INITIAL_STATE:
       return {
-        state: initialState
+        state: initialState,
       };
     case LOADING_USER:
       return {

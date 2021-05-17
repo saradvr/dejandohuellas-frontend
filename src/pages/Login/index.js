@@ -4,17 +4,18 @@ import { Input } from '../../components/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/userReducer';
 import { Header } from '../../components/Header';
-import { useHistory } from 'react-router';
+import { Redirect, useLocation } from 'react-router';
 import { StyledMain } from '../../components/Main';
 import { FormLabel } from '../../components/FormLabel';
 import { ImgSection, LoginForm, StyledTitle } from './styles';
 import { LoadingPawPrints } from '../../components/LoadingPawPrints';
 
 export function Login() {
+  const [redirectToReferrer, setRedirectToReferrer] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { state } = useLocation();
 
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const { error, loading } = useSelector(({ userReducer }) => ({
@@ -24,12 +25,17 @@ export function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(login(email.toLowerCase(), password));
+    dispatch(
+      login(email.toLowerCase(), password, () => setRedirectToReferrer(true))
+    );
   }
 
   const token = localStorage.getItem('token');
-  if (token) {
-    history.push('/');
+
+  if (redirectToReferrer === true) {
+    return <Redirect to={state?.from || '/'} />;
+  } else if (!!token) {
+    return <Redirect to="/" />;
   }
 
   return (

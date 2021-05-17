@@ -10,5 +10,5 @@ export const StyledMain = styled.main`
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: ${props => props.justify ? props.justify : ''};
+  justify-content: ${(props) => (props.justify ? props.justify : '')};
 `;

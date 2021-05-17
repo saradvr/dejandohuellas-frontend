@@ -13,7 +13,7 @@ export function Header({ fixed, sticky }) {
     history.push('/entrar');
   }
   const token = localStorage.getItem('token');
-
+  const userType = localStorage.getItem('userType');
   return (
     <>
       <StyledNavBar
@@ -36,7 +36,11 @@ export function Header({ fixed, sticky }) {
             <Nav.Link href="/">Inicio</Nav.Link>
             {!token && <Nav.Link href="/entrar">Iniciar sesión</Nav.Link>}
             {!token && <Nav.Link href="/registro">Registrarme</Nav.Link>}
-            {token && <Nav.Link href="/perfil">Mi perfil</Nav.Link>}
+            {token && userType === 'ONG' ? (
+              <Nav.Link href="/perfil">Mi perfil</Nav.Link>
+            ) : (
+              <Nav.Link href="/solicitudes">Mis solicitudes</Nav.Link>
+            )}
             <Nav.Link href="/adopta">¡Adopta!</Nav.Link>
             {token && (
               <HeaderButton

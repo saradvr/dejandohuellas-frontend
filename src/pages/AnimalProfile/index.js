@@ -24,6 +24,7 @@ import {
   Banner,
 } from './styles';
 import { LoadingPawPrints } from '../../components/LoadingPawPrints';
+import { LinkButton } from '../../components/LinkButton';
 
 export function AnimalProfile({ edit }) {
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
@@ -98,7 +99,7 @@ export function AnimalProfile({ edit }) {
           <HistoryDiv>
             <ItemTitleP>Un poco de mi historia...</ItemTitleP>
             <p>{history}</p>
-            {!!edit && (
+            {!!edit ? (
               <ButtonsDiv>
                 <Button
                   type="button"
@@ -112,6 +113,12 @@ export function AnimalProfile({ edit }) {
                 >
                   Eliminar este peludo
                 </Button>
+              </ButtonsDiv>
+            ) : (
+              <ButtonsDiv>
+                <LinkButton to={(location) => `${location.pathname}/adopt`}>
+                  ¡Quiero adoptarlo!
+                </LinkButton>
               </ButtonsDiv>
             )}
           </HistoryDiv>

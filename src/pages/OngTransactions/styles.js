@@ -17,9 +17,9 @@ export const StyledTable = styled(Table)`
   margin: 0;
   text-align: center;
   background-color: transparent;
-  thead tr th{
-    background-color: #227F83;
-    color: #F6F4EB;
+  thead tr th {
+    background-color: #227f83;
+    color: #f6f4eb;
     vertical-align: middle;
     position: sticky;
     top: 0;
@@ -35,10 +35,10 @@ export const StyledTable = styled(Table)`
     border-radius: 0 10px 0 0;
   }
   tr:last-child {
-    td:first-child{
+    td:first-child {
       border-radius: 0 0 0 10px;
     }
-    td:last-child{
+    td:last-child {
       border-radius: 0 0 10px 0;
     }
   }
@@ -68,7 +68,7 @@ export const StyledTitle = styled.h1`
   font-family: 'Snowy Night';
   color: black;
 
-  @media screen and (min-width: 1024px){
+  @media screen and (min-width: 1024px) {
     font-size: 3.5rem;
     margin: 20px auto 60px auto;
   }

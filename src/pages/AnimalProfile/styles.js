@@ -120,7 +120,7 @@ export const ButtonsDiv = styled.div`
 `;
 
 export const MainProfilePet = styled(StyledMain)`
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1044px) {
     height: 100%;
   }
 `;
