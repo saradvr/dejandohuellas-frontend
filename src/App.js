@@ -15,6 +15,7 @@ import { TransactionResult } from './pages/TransactionResult';
 import { OngTransactions } from './pages/OngTransactions';
 import { AdoptionRequest } from './pages/AdoptionRequest';
 import { PersonRequests } from './pages/PersonRequests';
+import { OngRequests } from './pages/OngRequests';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -103,6 +104,9 @@ function App() {
         <PrivateRoute exact path="/solicitudes">
           <PersonRequests />
         </PrivateRoute>
+        <PrivateONGRoute exact path="/requests">
+          <OngRequests />
+        </PrivateONGRoute>
       </Switch>
     </Router>
   );

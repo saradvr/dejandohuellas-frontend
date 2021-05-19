@@ -25,7 +25,7 @@ export function createRequest(animalId, ongId, message, cb) {
           animal: animalId,
           ong: ongId,
           message,
-          status: 'Nuevo',
+          status: 'Nueva',
         },
       });
       dispatch({ type: REQUEST_SUCCESS, payload: data.request });
@@ -42,6 +42,44 @@ export function createRequest(animalId, ongId, message, cb) {
         dispatch({
           type: ERROR_REQUEST,
           payload: 'Error para cargar la información.',
+        });
+      }
+    } finally {
+      dispatch({ type: FINISHED_REQUEST });
+    }
+  };
+}
+
+export function deleteRequest(requestId, cb) {
+  return async function (dispatch) {
+    dispatch({ type: SAVING_REQUEST });
+    try {
+      const token = localStorage.getItem('token');
+      const { data } = await axios({
+        method: 'DELETE',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: '/requests/delete',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          requestId
+        },
+      });
+      dispatch({ type: REQUEST_SUCCESS, payload: data.request });
+      cb();
+    } catch (error) {
+      if (!!error.response) {
+        dispatch({ type: ERROR_REQUEST, payload: error.response.data.message });
+        if (error.response.request.status === 401) {
+          localStorage.clear();
+          alert('Su sesión expiró, ingrese nuevamente.');
+          history.push('/entrar');
+        }
+      } else {
+        dispatch({
+          type: ERROR_REQUEST,
+          payload: 'Error para eliminar la solicitud.',
         });
       }
     } finally {
@@ -81,6 +119,40 @@ export function updateRequest(status, _id) {
         dispatch({
           type: ERROR_REQUEST,
           payload: 'Error para guardar el cambio.',
+        });
+      }
+    } finally {
+      dispatch({ type: FINISHED_REQUEST });
+    }
+  };
+}
+
+export function getRequests() {
+  return async function (dispatch) {
+    dispatch({ type: LOADING_REQUEST });
+    try {
+      const token = localStorage.getItem('token');
+      const { data } = await axios({
+        method: 'GET',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: 'requests/list',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch({ type: REQUESTS_SUCCESS, payload: data.requests });
+    } catch (error) {
+      if (!!error.response) {
+        dispatch({ type: ERROR_REQUEST, payload: error.response.data.message });
+        if (error.response.request.status === 401) {
+          localStorage.clear();
+          alert('Su sesión expiró, ingrese nuevamente.');
+          history.push('/entrar');
+        }
+      } else {
+        dispatch({
+          type: ERROR_REQUEST,
+          payload: 'Error para cargar las solicitudes.',
         });
       }
     } finally {

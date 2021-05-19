@@ -38,13 +38,15 @@ export function PersonRequest({ request }) {
           <Modal.Title>Confirmación</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>¿Estás seguro que deseas que la fundación retire tu solicitud?</p>
+          <p>
+            ¿Estás seguro de que deseas que la fundación retire tu solicitud?
+          </p>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={(e) => setShowConfirm(false)}>No</Button>
           <Button
             onClick={(e) => {
-              dispatch(updateRequest('Retiro', _id));
+              dispatch(updateRequest('Retirada', _id));
               setShowConfirm(false);
             }}
           >
