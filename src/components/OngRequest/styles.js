@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledArticle = styled.article`
@@ -20,6 +21,14 @@ export const StyledArticle = styled.article`
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
+  }
+`;
+
+export const ArticleLink = styled(Link)`
+  color: black;
+  &:hover{
+    text-decoration: none;
+    color: black;
   }
 `;
 

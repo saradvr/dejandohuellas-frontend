@@ -50,7 +50,7 @@ export function createRequest(animalId, ongId, message, cb) {
   };
 }
 
-export function deleteRequest(requestId, cb) {
+export function deleteRequest(requestId) {
   return async function (dispatch) {
     dispatch({ type: SAVING_REQUEST });
     try {
@@ -67,7 +67,7 @@ export function deleteRequest(requestId, cb) {
         },
       });
       dispatch({ type: REQUEST_SUCCESS, payload: data.request });
-      cb();
+      history.push('/requests');
     } catch (error) {
       if (!!error.response) {
         dispatch({ type: ERROR_REQUEST, payload: error.response.data.message });
@@ -80,6 +80,40 @@ export function deleteRequest(requestId, cb) {
         dispatch({
           type: ERROR_REQUEST,
           payload: 'Error para eliminar la solicitud.',
+        });
+      }
+    } finally {
+      dispatch({ type: FINISHED_REQUEST });
+    }
+  };
+}
+
+export function getRequest(requestId) {
+  return async function (dispatch) {
+    dispatch({ type: LOADING_REQUEST });
+    try {
+      const token = localStorage.getItem('token');
+      const { data } = await axios({
+        method: 'GET',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: `/requests/${requestId}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      });
+      dispatch({ type: REQUEST_SUCCESS, payload: data.request });
+    } catch (error) {
+      if (!!error.response) {
+        dispatch({ type: ERROR_REQUEST, payload: error.response.data.message });
+        if (error.response.request.status === 401) {
+          localStorage.clear();
+          alert('Su sesión expiró, ingrese nuevamente.');
+          history.push('/entrar');
+        }
+      } else {
+        dispatch({
+          type: ERROR_REQUEST,
+          payload: 'Error para cargar la solicitud.',
         });
       }
     } finally {

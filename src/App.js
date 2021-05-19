@@ -16,6 +16,7 @@ import { OngTransactions } from './pages/OngTransactions';
 import { AdoptionRequest } from './pages/AdoptionRequest';
 import { PersonRequests } from './pages/PersonRequests';
 import { OngRequests } from './pages/OngRequests';
+import { RequestInformation } from './pages/RequestInformation';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -106,6 +107,9 @@ function App() {
         </PrivateRoute>
         <PrivateONGRoute exact path="/requests">
           <OngRequests />
+        </PrivateONGRoute>
+        <PrivateONGRoute exact path="/requests/:requestId">
+          <RequestInformation />
         </PrivateONGRoute>
       </Switch>
     </Router>
