@@ -26,7 +26,7 @@ export const StyledArticle = styled.article`
 
 export const ArticleLink = styled(Link)`
   color: black;
-  &:hover{
+  &:hover {
     text-decoration: none;
     color: black;
   }

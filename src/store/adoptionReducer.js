@@ -99,7 +99,7 @@ export function getRequest(requestId) {
         url: `/requests/${requestId}`,
         headers: {
           Authorization: `Bearer ${token}`,
-        }
+        },
       });
       dispatch({ type: REQUEST_SUCCESS, payload: data.request });
     } catch (error) {

@@ -10,7 +10,7 @@ import { getRequest, deleteRequest } from '../../store/adoptionReducer';
 import Modal from 'react-bootstrap/Modal';
 
 export function RequestInformation() {
-  const {requestId} = useParams();
+  const { requestId } = useParams();
   const dispatch = useDispatch();
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
@@ -18,30 +18,23 @@ export function RequestInformation() {
     dispatch(getRequest(requestId));
   }, [dispatch, requestId]);
 
-  const { request, loading, error } = useSelector(( {adoptionReducer} ) => ({
+  const { request, loading, error } = useSelector(({ adoptionReducer }) => ({
     request: adoptionReducer.request,
     loading: adoptionReducer.loading,
     error: adoptionReducer.error,
   }));
 
-  if(!request) return;
-  const { animal , message, person, status, _id } = request;
+  if (!request) return;
+  const { animal, message, person, status, _id } = request;
 
   return (
     <>
       <Header />
       <StyledMain>
         {!!loading && <LoadingPawPrints show={loading} />}
-        <section>
-          AnimalInfo
-        </section>
-        <section>
-          Solicitud Info
-        </section>
-        <Button
-          type="button"
-          onClick={(e) => setShowConfirmDelete(true)}
-        >
+        <section>AnimalInfo</section>
+        <section>Solicitud Info</section>
+        <Button type="button" onClick={(e) => setShowConfirmDelete(true)}>
           Eliminar esta solicitud
         </Button>
         <ModalMessage
