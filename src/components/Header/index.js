@@ -36,12 +36,15 @@ export function Header({ fixed, sticky }) {
             <Nav.Link href="/">Inicio</Nav.Link>
             {!token && <Nav.Link href="/entrar">Iniciar sesión</Nav.Link>}
             {!token && <Nav.Link href="/registro">Registrarme</Nav.Link>}
-            {token && userType === 'ONG' ? (
-              <Nav.Link href="/perfil">Mi perfil</Nav.Link>
-            ) : (
-              <Nav.Link href="/solicitudes">Mis solicitudes</Nav.Link>
+            {token &&
+              (userType === 'ONG' ? (
+                <Nav.Link href="/perfil">Mi perfil</Nav.Link>
+              ) : (
+                <Nav.Link href="/solicitudes">Mis solicitudes</Nav.Link>
+              ))}
+            {userType !== 'ONG' && (
+              <Nav.Link href="/ong/60a1a5444fe327246c01c284">¡Adopta!</Nav.Link>
             )}
-            <Nav.Link href="/adopta">¡Adopta!</Nav.Link>
             {token && (
               <HeaderButton
                 type="button"

@@ -139,6 +139,7 @@ export function OngProfile({ isPublic }) {
                   Agregar peludo
                 </Button>
                 <LinkButton to={'/transactions'}>Ver transacciones</LinkButton>
+                <LinkButton to={'/requests'}>Revisar Solicitudes</LinkButton>
               </ButtonsDiv>
             )}
           </DescriptionContainer>

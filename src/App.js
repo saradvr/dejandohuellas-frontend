@@ -14,6 +14,8 @@ import SnowyNight from './components/Tipografia/Snowy-Night.ttf';
 import { TransactionResult } from './pages/TransactionResult';
 import { OngTransactions } from './pages/OngTransactions';
 import { AdoptionRequest } from './pages/AdoptionRequest';
+import { PersonRequests } from './pages/PersonRequests';
+import { OngRequests } from './pages/OngRequests';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -99,6 +101,12 @@ function App() {
         <PrivateRoute exact path="/peludo/:animalId/adopt">
           <AdoptionRequest />
         </PrivateRoute>
+        <PrivateRoute exact path="/solicitudes">
+          <PersonRequests />
+        </PrivateRoute>
+        <PrivateONGRoute exact path="/requests">
+          <OngRequests />
+        </PrivateONGRoute>
       </Switch>
     </Router>
   );

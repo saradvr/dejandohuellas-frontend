@@ -97,7 +97,8 @@ export const ButtonsDiv = styled.div`
   @media screen and (min-width: 425px) {
     flex-direction: row;
     justify-content: space-around;
-    & button {
+    & button,
+    a {
       margin: 20px 10px;
     }
   }
