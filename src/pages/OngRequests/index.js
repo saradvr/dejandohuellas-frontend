@@ -26,11 +26,11 @@ export function OngRequests() {
         {!!loading && <LoadingPawPrints show={loading} />}
         <section>
           {!!error && <p>Error al cargar las solicitudes.</p>}
-          {!!requests && requests.length > 0 && requests.map(request => {
-            return (
-              <OngRequest key={request._id} request={request} />
-            );
-          })}
+          {!!requests &&
+            requests.length > 0 &&
+            requests.map((request) => {
+              return <OngRequest key={request._id} request={request} />;
+            })}
         </section>
       </StyledMain>
     </>

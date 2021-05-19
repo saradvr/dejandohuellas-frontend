@@ -9,7 +9,7 @@ export const StyledProfilePicture = styled.img`
 `;
 
 export const StyledNameH2 = styled.h2`
-  color: #227F83;
+  color: #227f83;
   font-family: 'Snowy Night';
   text-align: center;
   margin-top: 20px;
@@ -29,7 +29,7 @@ export const StyledNameH2 = styled.h2`
 export const AnimalSection = styled.section`
   max-width: 300px;
   margin: 0 auto;
-  @media screen and (min-width: 768px){
+  @media screen and (min-width: 768px) {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -109,7 +109,7 @@ export const Banner = styled.img`
 export const AdoptMain = styled(StyledMain)`
   height: auto;
 
-  @media screen and (min-width: 768px){
+  @media screen and (min-width: 768px) {
     height: 100%;
   }
 `;

@@ -63,7 +63,7 @@ export function deleteRequest(requestId, cb) {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          requestId
+          requestId,
         },
       });
       dispatch({ type: REQUEST_SUCCESS, payload: data.request });
