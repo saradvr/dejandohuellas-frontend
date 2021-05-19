@@ -10,7 +10,16 @@ import { getAnimal } from '../../store/animalReducer';
 import { createRequest } from '../../store/adoptionReducer';
 import { StyledTextArea } from '../../components/FormTextArea';
 import { LoadingPawPrints } from '../../components/LoadingPawPrints';
-import { AdoptMain, AnimalSection, Banner, PersonSection, RequestSection, StyledForm, StyledNameH2, StyledProfilePicture } from './styles';
+import {
+  AdoptMain,
+  AnimalSection,
+  Banner,
+  PersonSection,
+  RequestSection,
+  StyledForm,
+  StyledNameH2,
+  StyledProfilePicture,
+} from './styles';
 import bannerImg from './Adopt.png';
 
 export function AdoptionRequest() {
@@ -95,7 +104,10 @@ export function AdoptionRequest() {
             {!!errorAnimal && (
               <p>Error al cargar información del peludo, intenta nuevamente.</p>
             )}
-            <StyledProfilePicture src={animal.profilePicture} alt="Foto animal" />
+            <StyledProfilePicture
+              src={animal.profilePicture}
+              alt="Foto animal"
+            />
           </AnimalSection>
           <PersonSection>
             {!!loadingPerson && <p>Cargando su información...</p>}
