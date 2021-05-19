@@ -1,5 +1,4 @@
 import { Header } from '../../components/Header';
-import { StyledMain } from '../../components/Main';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPerson, updatePerson } from '../../store/personReducer';
@@ -11,6 +10,8 @@ import { getAnimal } from '../../store/animalReducer';
 import { createRequest } from '../../store/adoptionReducer';
 import { StyledTextArea } from '../../components/FormTextArea';
 import { LoadingPawPrints } from '../../components/LoadingPawPrints';
+import { AdoptMain, AnimalSection, Banner, PersonSection, RequestSection, StyledForm, StyledNameH2, StyledProfilePicture } from './styles';
+import bannerImg from './Adopt.png';
 
 export function AdoptionRequest() {
   const [name, setName] = useState('');
@@ -81,21 +82,22 @@ export function AdoptionRequest() {
   return (
     <>
       <Header />
-      <StyledMain>
-        <section>
-          {!!errorAnimal && (
-            <p>Error al cargar información del peludo, intenta nuevamente.</p>
-          )}
-          <img src={animal.profilePicture} alt="Foto animal" />
-          <h2>{animal.name}</h2>
-        </section>
+      <AdoptMain>
+        <Banner src={bannerImg} alt="Banner de adopción" />
         {(!!loadingPerson || !!loadingAnimal) && (
           <LoadingPawPrints
             show={!!loadingPerson ? loadingPerson : loadingAnimal}
           />
         )}
-        <form onSubmit={handleSubmit}>
-          <section>
+        <StyledNameH2>{animal.name}</StyledNameH2>
+        <StyledForm onSubmit={handleSubmit}>
+          <AnimalSection>
+            {!!errorAnimal && (
+              <p>Error al cargar información del peludo, intenta nuevamente.</p>
+            )}
+            <StyledProfilePicture src={animal.profilePicture} alt="Foto animal" />
+          </AnimalSection>
+          <PersonSection>
             {!!loadingPerson && <p>Cargando su información...</p>}
             <FormLabel htmlFor="name">Nombre: </FormLabel>
             {!!person && !!person.user && (
@@ -109,7 +111,13 @@ export function AdoptionRequest() {
               />
             )}
             <FormLabel htmlFor="email">Correo: </FormLabel>
-            <p>{!!person && !!person.user && person.user.email}</p>
+            <Input
+              type="text"
+              name="email"
+              id="email"
+              value={!!person && !!person.user && person.user.email}
+              disabled={true}
+            />
             <FormLabel htmlFor="phone">Número de celular: </FormLabel>
             <Input
               type="number"
@@ -132,8 +140,8 @@ export function AdoptionRequest() {
               <p>Hubo un error con su información, intente nuevamente.</p>
             )}
             {!!savingPerson && <p>Se está guardando su información.</p>}
-          </section>
-          <section>
+          </PersonSection>
+          <RequestSection>
             <FormLabel htmlFor="message">
               Cuéntanos por qué deseas adoptar este peludo:
             </FormLabel>
@@ -143,14 +151,14 @@ export function AdoptionRequest() {
               onChange={(e) => setMessage(e.target.value)}
               required={true}
             />
-          </section>
-          {!!errorRequest && (
-            <p>Hubo un error para guardar la solicitud, intente de nuevo.</p>
-          )}
-          {!!savingRequest && <p>Guardando su solicitud...</p>}
-          <Button type="submit">Enviar solicitud</Button>
-        </form>
-      </StyledMain>
+            {!!errorRequest && (
+              <p>Hubo un error para guardar la solicitud, intente de nuevo.</p>
+            )}
+            {!!savingRequest && <p>Guardando su solicitud...</p>}
+            <Button type="submit">Enviar solicitud</Button>
+          </RequestSection>
+        </StyledForm>
+      </AdoptMain>
     </>
   );
 }

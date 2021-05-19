@@ -5,5 +5,5 @@ export const FormLabel = styled.label`
   font-style: italic;
   font-weight: 400;
   display: block;
-  margin: 10px 0 0 0;
+  margin: 10px 0 3px 0;
 `;
