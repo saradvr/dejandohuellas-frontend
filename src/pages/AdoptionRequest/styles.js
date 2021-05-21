@@ -35,6 +35,8 @@ export const AnimalSection = styled.section`
     justify-content: center;
     flex-basis: 0;
     flex-grow: 1;
+    margin: 10px;
+    justify-content: center;
   }
 
   @media screen and (min-width: 1024px) {

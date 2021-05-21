@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { history } from '../utils/history';
-import { getPerson } from './personReducer';
 
 const SAVING_REQUEST = 'SAVING_REQUEST';
 const LOADING_REQUEST = 'LOADING_REQUEST';
@@ -122,7 +121,7 @@ export function getRequest(requestId) {
   };
 }
 
-export function updateRequest(status, _id) {
+export function updateRequest(status, _id, cb) {
   return async function (dispatch) {
     dispatch({ type: SAVING_REQUEST });
     try {
@@ -140,7 +139,7 @@ export function updateRequest(status, _id) {
         },
       });
       dispatch({ type: REQUEST_SUCCESS, payload: data.request });
-      dispatch(getPerson());
+      cb();
     } catch (error) {
       if (!!error.response) {
         dispatch({ type: ERROR_REQUEST, payload: error.response.data.message });
@@ -161,7 +160,7 @@ export function updateRequest(status, _id) {
   };
 }
 
-export function getRequests() {
+export function getRequests(params) {
   return async function (dispatch) {
     dispatch({ type: LOADING_REQUEST });
     try {
@@ -173,6 +172,7 @@ export function getRequests() {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        params: params,
       });
       dispatch({ type: REQUESTS_SUCCESS, payload: data.requests });
     } catch (error) {

@@ -35,7 +35,7 @@ export const ImageContainer = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-    max-width: 50%;
+    max-width: 40%;
   }
 
   @media screen and (min-width: 1024px) {
@@ -60,6 +60,11 @@ export const PrincipalInformationDiv = styled.div`
 
   @media screen and (min-width: 768px) {
     width: 50%;
+  }
+
+  @media screen and (min-width: 1024px) {
+    flex-basis: 0;
+    flex-grow: 1;
   }
 
   @media screen and (min-width: 768px) {
@@ -114,14 +119,20 @@ export const ButtonsDiv = styled.div`
     flex-direction: row;
     justify-content: space-around;
     & button {
+      margin: 0 10px 50px 0;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    & button {
       margin: 20px 10px;
     }
   }
 `;
 
 export const MainProfilePet = styled(StyledMain)`
-  @media screen and (min-width: 1044px) {
+  @media screen and (min-width: 768px) {
     height: 100%;
+    padding-bottom: 30px;
   }
 `;
 

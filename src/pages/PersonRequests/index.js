@@ -20,7 +20,7 @@ export function PersonRequests() {
   return (
     <>
       <Header />
-      <StyledMain>
+      <StyledMain height={'auto'}>
         <Banner src={bannerImg} alt="Banner solicitudes adopción" />
         <RequestsSection>
           {!!person &&
