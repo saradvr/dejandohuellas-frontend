@@ -9,6 +9,7 @@ import { OngRequest } from '../../components/OngRequest';
 import { getRequests } from '../../store/adoptionReducer';
 import { getOng } from '../../store/ongReducer';
 import { FilterGroup, FiltersSection, RequestsSection } from './styles';
+import banner from './bannerRequests.png';
 
 export function OngRequests() {
   const [filterAnimalId, setFilterAnimalId] = useState('');
@@ -48,6 +49,7 @@ export function OngRequests() {
     <>
       <Header />
       <StyledMain>
+        <img src={banner} alt="Banner" width="100%" />
         {!!loading && <LoadingPawPrints show={loading} />}
         <FiltersSection>
           <FilterGroup>

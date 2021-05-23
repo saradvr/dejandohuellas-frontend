@@ -2,10 +2,17 @@ import styled from 'styled-components';
 import { StyledMain } from '../../components/Main';
 import { PrincipalInformationDiv } from '../AnimalProfile/styles';
 
+export const TitleH1 = styled.h1`
+  font-family: 'Snowy Night';
+  color: #227f83;
+  margin-top: 20px;
+  text-align: center;
+`;
+
 export const InfoAnimalSection = styled.section`
   display: flex;
   flex-direction: column;
-  margin: 50px auto 10px auto;
+  margin: 50px auto 50px auto;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
@@ -39,17 +46,15 @@ export const RequestInfoSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 90%;
-
-  @media screen and (min-width: 768px) {
-    margin-top: 30px;
-  }
 `;
 
 export const RequestMain = styled(StyledMain)`
   height: auto;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     height: 100%;
+    justify-content: space-around;
+    padding-bottom: 50px;
   }
 `;
 
@@ -74,6 +79,7 @@ export const ButtonsStatusDiv = styled.div`
   @media screen and (min-width: 768px) {
     display: flex;
     align-items: flex-end;
+    margin-bottom: 30px;
 
     button {
       flex-basis: 0;

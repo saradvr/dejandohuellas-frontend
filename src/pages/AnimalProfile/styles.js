@@ -92,7 +92,7 @@ export const ItemTitleP = styled.p`
   font-size: 26px;
 `;
 
-export const GroupInfoP = styled.p`
+export const GroupInfoP = styled.div`
   font-family: 'Snowy Night';
   font-style: normal;
   font-size: 26px;

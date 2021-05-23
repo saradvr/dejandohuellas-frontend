@@ -43,7 +43,9 @@ export function Header({ fixed, sticky }) {
                 <Nav.Link href="/solicitudes">Mis solicitudes</Nav.Link>
               ))}
             {userType !== 'ONG' && (
-              <Nav.Link href="/ong/60a1a5444fe327246c01c284">¡Adopta!</Nav.Link>
+              <Nav.Link href={`/ong/${process.env.REACT_APP_ONG}`}>
+                ¡Adopta!
+              </Nav.Link>
             )}
             {token && (
               <HeaderButton

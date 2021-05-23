@@ -139,7 +139,9 @@ export function updateRequest(status, _id, cb) {
         },
       });
       dispatch({ type: REQUEST_SUCCESS, payload: data.request });
-      cb();
+      if (!!cb) {
+        cb();
+      }
     } catch (error) {
       if (!!error.response) {
         dispatch({ type: ERROR_REQUEST, payload: error.response.data.message });

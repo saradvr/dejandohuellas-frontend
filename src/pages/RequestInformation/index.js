@@ -28,8 +28,10 @@ import {
   ButtonsStatusDiv,
   AnimalInformationDiv,
   StatusDiv,
+  TitleH1,
 } from './styles';
 import { FormLabel } from '../../components/FormLabel';
+import banner from './Request.png';
 
 export function RequestInformation() {
   const { requestId } = useParams();
@@ -105,28 +107,38 @@ export function RequestInformation() {
             </AnimalInformationDiv>
           </InfoAnimalSection>
         )}
+        <img src={banner} alt="Banner" width="100%" />
+        <TitleH1>Información del solicitante</TitleH1>
         <RequestInfoSection>
-          <p>{message}</p>
           {!!person && (
             <PersonInfoDiv>
               <GroupInfoDiv>
-                <p>Nombre: </p>
+                <p>
+                  <strong>Nombre:</strong>
+                </p>
                 <p>{person.user.name}</p>
               </GroupInfoDiv>
               <GroupInfoDiv>
-                <p>Correo: </p>
+                <p>
+                  <strong>Correo:</strong>
+                </p>
                 <p>{person.user.email}</p>
               </GroupInfoDiv>
               <GroupInfoDiv>
-                <p>Teléfono: </p>
+                <p>
+                  <strong>Teléfono:</strong>
+                </p>
                 <p>{person.phone}</p>
               </GroupInfoDiv>
               <GroupInfoDiv>
-                <p>Ciudad: </p>
+                <p>
+                  <strong>Ciudad:</strong>
+                </p>
                 <p>{person.city}</p>
               </GroupInfoDiv>
             </PersonInfoDiv>
           )}
+          <p>{message}</p>
           <ButtonsStatusDiv>
             <StatusDiv>
               <FormLabel htmlFor="status">Estado de la solicitud:</FormLabel>
