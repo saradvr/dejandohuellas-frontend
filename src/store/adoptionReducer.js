@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { history } from '../utils/history';
-import { getPerson } from './personReducer';
 
 const SAVING_REQUEST = 'SAVING_REQUEST';
 const LOADING_REQUEST = 'LOADING_REQUEST';
@@ -50,7 +49,7 @@ export function createRequest(animalId, ongId, message, cb) {
   };
 }
 
-export function deleteRequest(requestId, cb) {
+export function deleteRequest(requestId) {
   return async function (dispatch) {
     dispatch({ type: SAVING_REQUEST });
     try {
@@ -67,7 +66,7 @@ export function deleteRequest(requestId, cb) {
         },
       });
       dispatch({ type: REQUEST_SUCCESS, payload: data.request });
-      cb();
+      history.push('/requests');
     } catch (error) {
       if (!!error.response) {
         dispatch({ type: ERROR_REQUEST, payload: error.response.data.message });
@@ -88,7 +87,41 @@ export function deleteRequest(requestId, cb) {
   };
 }
 
-export function updateRequest(status, _id) {
+export function getRequest(requestId) {
+  return async function (dispatch) {
+    dispatch({ type: LOADING_REQUEST });
+    try {
+      const token = localStorage.getItem('token');
+      const { data } = await axios({
+        method: 'GET',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: `/requests/${requestId}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch({ type: REQUEST_SUCCESS, payload: data.request });
+    } catch (error) {
+      if (!!error.response) {
+        dispatch({ type: ERROR_REQUEST, payload: error.response.data.message });
+        if (error.response.request.status === 401) {
+          localStorage.clear();
+          alert('Su sesión expiró, ingrese nuevamente.');
+          history.push('/entrar');
+        }
+      } else {
+        dispatch({
+          type: ERROR_REQUEST,
+          payload: 'Error para cargar la solicitud.',
+        });
+      }
+    } finally {
+      dispatch({ type: FINISHED_REQUEST });
+    }
+  };
+}
+
+export function updateRequest(status, _id, cb) {
   return async function (dispatch) {
     dispatch({ type: SAVING_REQUEST });
     try {
@@ -106,7 +139,9 @@ export function updateRequest(status, _id) {
         },
       });
       dispatch({ type: REQUEST_SUCCESS, payload: data.request });
-      dispatch(getPerson());
+      if (!!cb) {
+        cb();
+      }
     } catch (error) {
       if (!!error.response) {
         dispatch({ type: ERROR_REQUEST, payload: error.response.data.message });
@@ -127,7 +162,7 @@ export function updateRequest(status, _id) {
   };
 }
 
-export function getRequests() {
+export function getRequests(params) {
   return async function (dispatch) {
     dispatch({ type: LOADING_REQUEST });
     try {
@@ -139,6 +174,7 @@ export function getRequests() {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        params: params,
       });
       dispatch({ type: REQUESTS_SUCCESS, payload: data.requests });
     } catch (error) {

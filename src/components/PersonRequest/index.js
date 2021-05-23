@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';
 import { updateRequest } from '../../store/adoptionReducer';
+import { getPerson } from '../../store/personReducer';
 import { Button } from '../Button';
 import { ModalMessage } from '../ModalMessage';
 import { StyledArticle, PetImage, AnimalNameH2 } from './styles';
@@ -46,7 +47,7 @@ export function PersonRequest({ request }) {
           <Button onClick={(e) => setShowConfirm(false)}>No</Button>
           <Button
             onClick={(e) => {
-              dispatch(updateRequest('Retirada', _id));
+              dispatch(updateRequest('Retirada', _id, dispatch(getPerson())));
               setShowConfirm(false);
             }}
           >

@@ -92,37 +92,33 @@ export function AnimalProfile({ edit }) {
               {city}
             </GroupInfoP>
             <GroupInfoP>
-              <ItemTitleP>Fundación: </ItemTitleP>
-              {!!ong && ong.user.name}
+              <ItemTitleP>{!!ong && ong.user.name}</ItemTitleP>
             </GroupInfoP>
           </PrincipalInformationDiv>
           <HistoryDiv>
             <ItemTitleP>Un poco de mi historia...</ItemTitleP>
             <p>{history}</p>
-            {!!edit ? (
-              <ButtonsDiv>
-                <Button
-                  type="button"
-                  onClick={(e) => dispatch({ type: SHOW_MODAL })}
-                >
-                  Actualizar información
-                </Button>
-                <Button
-                  type="button"
-                  onClick={(e) => setShowConfirmDelete(true)}
-                >
-                  Eliminar este peludo
-                </Button>
-              </ButtonsDiv>
-            ) : (
-              <ButtonsDiv>
-                <LinkButton to={(location) => `${location.pathname}/adopt`}>
-                  ¡Quiero adoptarlo!
-                </LinkButton>
-              </ButtonsDiv>
-            )}
           </HistoryDiv>
         </InformationSection>
+        {!!edit ? (
+          <ButtonsDiv>
+            <Button
+              type="button"
+              onClick={(e) => dispatch({ type: SHOW_MODAL })}
+            >
+              Actualizar información
+            </Button>
+            <Button type="button" onClick={(e) => setShowConfirmDelete(true)}>
+              Eliminar este peludo
+            </Button>
+          </ButtonsDiv>
+        ) : (
+          <ButtonsDiv>
+            <LinkButton to={(location) => `${location.pathname}/adopt`}>
+              ¡Quiero adoptarlo!
+            </LinkButton>
+          </ButtonsDiv>
+        )}
         <StyledModal
           show={showModal}
           onHide={(e) => dispatch({ type: HIDE_MODAL })}

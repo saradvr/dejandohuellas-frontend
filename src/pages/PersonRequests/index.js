@@ -4,7 +4,8 @@ import { Header } from '../../components/Header';
 import { StyledMain } from '../../components/Main';
 import { PersonRequest } from '../../components/PersonRequest';
 import { getPerson } from '../../store/personReducer';
-import { RequestsSection } from './styles';
+import { Banner, RequestsSection } from './styles';
+import bannerImg from './SOLICITUD.png';
 
 export function PersonRequests() {
   const dispatch = useDispatch();
@@ -19,7 +20,8 @@ export function PersonRequests() {
   return (
     <>
       <Header />
-      <StyledMain>
+      <StyledMain height={'auto'}>
+        <Banner src={bannerImg} alt="Banner solicitudes adopción" />
         <RequestsSection>
           {!!person &&
             !!person.requests &&
