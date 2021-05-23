@@ -9,6 +9,7 @@ import {
   getRequest,
   deleteRequest,
   updateRequest,
+  CHANGE_STATUS,
 } from '../../store/adoptionReducer';
 import Modal from 'react-bootstrap/Modal';
 import { FormSelect } from '../../components/FormSelect';
@@ -43,11 +44,15 @@ export function RequestInformation() {
     dispatch(getRequest(requestId));
   }, [dispatch, requestId]);
 
-  const { request, loading, error } = useSelector(({ adoptionReducer }) => ({
-    request: adoptionReducer.request,
-    loading: adoptionReducer.loading,
-    error: adoptionReducer.error,
-  }));
+  const { request, loading, error, saving, changes } = useSelector(
+    ({ adoptionReducer }) => ({
+      request: adoptionReducer.request,
+      loading: adoptionReducer.loading,
+      error: adoptionReducer.error,
+      saving: adoptionReducer.saving,
+      changes: adoptionReducer.changes,
+    })
+  );
 
   useEffect(() => {
     setNewStatus(request.status);
@@ -66,6 +71,11 @@ export function RequestInformation() {
       ageYears = Math.ceil(animal.age / 12);
       time = ageYears === 1 ? 'año' : 'años';
     }
+  }
+
+  function changeStatus(e) {
+    setNewStatus(e.target.value);
+    dispatch({ type: CHANGE_STATUS });
   }
 
   return (
@@ -146,7 +156,7 @@ export function RequestInformation() {
                 name="status"
                 id="status"
                 value={newStatus}
-                onChange={(e) => setNewStatus(e.target.value)}
+                onChange={changeStatus}
                 defaultValue={status}
               >
                 <option value="Nueva">Nueva</option>
@@ -178,6 +188,10 @@ export function RequestInformation() {
             </StatusDiv>
           </ButtonsStatusDiv>
         </RequestInfoSection>
+        {!!saving && <p>Guardando la información...</p> && (
+          <LoadingPawPrints show={saving} />
+        )}
+        {!!changes && <p>No ha guardado los cambios.</p>}
         <ModalMessage
           show={showConfirmDelete}
           onHide={(e) => setShowConfirmDelete(false)}

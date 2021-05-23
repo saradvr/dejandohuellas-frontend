@@ -12,6 +12,7 @@ import { FilterGroup, FiltersSection, RequestsSection } from './styles';
 import banner from './bannerRequests.png';
 
 export function OngRequests() {
+  const [heightMain, setHeightMain] = useState('100%');
   const [filterAnimalId, setFilterAnimalId] = useState('');
   const [filterStatus, setFilterStatus] = useState('');
   const [filterAnimalType, setFilterAnimalType] = useState('');
@@ -41,6 +42,14 @@ export function OngRequests() {
     dispatch(getRequests({ filterStatus, filterAnimalId, filterAnimalType }));
   }, [dispatch, filterStatus, filterAnimalId, filterAnimalType]);
 
+  useEffect(() => {
+    if (!!requests && requests.length > 4) {
+      setHeightMain('auto');
+    } else {
+      setHeightMain('100%');
+    }
+  }, [requests.length, requests]);
+
   function handleFilter(e, filter) {
     filtros[filter](e.target.value);
   }
@@ -48,7 +57,7 @@ export function OngRequests() {
   return (
     <>
       <Header />
-      <StyledMain>
+      <StyledMain height={heightMain}>
         <img src={banner} alt="Banner" width="100%" />
         {!!loading && <LoadingPawPrints show={loading} />}
         <FiltersSection>

@@ -7,6 +7,7 @@ const ERROR_REQUEST = 'ERROR_REQUEST';
 const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 const REQUESTS_SUCCESS = 'REQUESTS_SUCCESS';
 const FINISHED_REQUEST = 'FINISHED_REQUEST';
+export const CHANGE_STATUS = 'CHANGE_STATUS';
 
 export function createRequest(animalId, ongId, message, cb) {
   return async function (dispatch) {
@@ -203,10 +204,16 @@ const initialState = {
   loading: false,
   request: {},
   requests: [],
+  changes: false,
 };
 
 export function adoptionReducer(state = initialState, action) {
   switch (action.type) {
+    case CHANGE_STATUS:
+      return {
+        ...state,
+        changes: true,
+      };
     case SAVING_REQUEST:
       return {
         ...state,
@@ -228,11 +235,13 @@ export function adoptionReducer(state = initialState, action) {
       return {
         ...state,
         requests: action.payload,
+        changes: false,
       };
     case REQUEST_SUCCESS:
       return {
         ...state,
         request: action.payload,
+        changes: false,
       };
     case FINISHED_REQUEST:
       return {
