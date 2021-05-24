@@ -50,5 +50,7 @@ export const Banner = styled.img`
 `;
 
 export const TransactionMain = styled(StyledMain)`
-  justify-content: center;
+  @media screen and (min-width: 768px) {
+    justify-content: center;
+  }
 `;

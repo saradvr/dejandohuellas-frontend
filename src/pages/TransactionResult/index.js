@@ -10,7 +10,7 @@ import {
   ResultContainer,
   StyledP,
   StyledPResult,
-  TransactionMain,
+  TransactionMain
 } from './styles';
 import bannerImg from './bannerTransaction.png';
 import bannerImgRejected from './bannerTransactionNo.png';
