@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header } from '../../components/Header';
 import { LoadingPawPrints } from '../../components/LoadingPawPrints';
-import { StyledMain } from '../../components/Main';
 import { getTransactions } from '../../store/transactionReducer';
 import {
   FiltersSection,
@@ -11,6 +10,7 @@ import {
   StyledTable,
   StyledTitle,
   TableDiv,
+  TransactionsMain,
 } from './styles';
 
 export function OngTransactions() {
@@ -27,9 +27,9 @@ export function OngTransactions() {
   );
   return (
     <>
-      <Header fixed="top" />
+      <Header />
       {!!loading && <LoadingPawPrints show={loading} />}
-      <StyledMain justify="center">
+      <TransactionsMain justify="center" height="auto">
         {!!error && <p>{error}</p>}
         <StyledTitle>Mis transacciones</StyledTitle>
         <FiltersSection>
@@ -85,7 +85,7 @@ export function OngTransactions() {
             </tbody>
           </StyledTable>
         </TableDiv>
-      </StyledMain>
+      </TransactionsMain>
     </>
   );
 }

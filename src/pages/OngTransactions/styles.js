@@ -2,6 +2,7 @@ import Table from 'react-bootstrap/Table';
 import styled from 'styled-components';
 import { FormLabel } from '../../components/FormLabel';
 import { FormSelect } from '../../components/FormSelect';
+import { StyledMain } from '../../components/Main';
 
 export const TableDiv = styled.div`
   width: 90%;
@@ -64,12 +65,24 @@ export const LabelStatus = styled(FormLabel)`
 
 export const StyledTitle = styled.h1`
   text-align: center;
-  margin: 130px auto 30px auto;
+  margin: 30px auto;
   font-family: 'Snowy Night';
   color: black;
 
   @media screen and (min-width: 1024px) {
     font-size: 3.5rem;
     margin: 20px auto 60px auto;
+  }
+`;
+
+export const TransactionsMain = styled(StyledMain)`
+  justify-content: flex-start;
+
+  @media screen and (min-width: 768px) {
+    justify-content: center;
+  }
+
+  @media screen and (min-height: 800px) {
+    height: 100%;
   }
 `;
