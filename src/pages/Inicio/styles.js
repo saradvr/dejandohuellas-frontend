@@ -14,7 +14,7 @@ export const InicioMain = styled.main`
   flex-direction: column;
   justify-content: center;
 
-  @media screen and (min-width: 460px) {
+  @media screen and (min-width: 425px) {
     background-position: center;
   }
 
