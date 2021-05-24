@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SHOW_MODAL, HIDE_MODAL } from '../../store/animalReducer';
 import { getOng, getPublicOng } from '../../store/ongReducer';
 import { AnimalCard } from '../../components/AnimalCard';
-import { StyledMain } from '../../components/Main';
 import { StyledModal } from '../../components/ModalAnimalInfo';
 import { useParams } from 'react-router';
 import { Input } from '../../components/Input';
@@ -23,6 +22,7 @@ import {
   NombreONG,
   StyledLogo,
   ButtonsDiv,
+  MainONGProfile,
 } from './styles';
 import bannerImage from './Perfil-fundación.png';
 import { ModalMessage } from '../../components/ModalMessage';
@@ -37,6 +37,7 @@ export function OngProfile({ isPublic }) {
   const [donationAmount, setDonationAmount] = useState('');
   const [donationEmail, setDonationEmail] = useState('');
   const [errorValidation, setErrorValidation] = useState('');
+  const [numberAnimals, setNumberAnimals] = useState(0);
 
   useEffect(() => {
     !!isPublic ? dispatch(getPublicOng(ongId)) : dispatch(getOng());
@@ -50,6 +51,12 @@ export function OngProfile({ isPublic }) {
       error: ongReducer.error,
     })
   );
+
+  useEffect(() => {
+    if(!!ong && !!ong.animals) {
+      setNumberAnimals(ong.animals.length);
+    }
+  }, [ong]);
 
   function donation(e) {
     e.preventDefault();
@@ -101,7 +108,7 @@ export function OngProfile({ isPublic }) {
   return (
     <>
       <Header />
-      <StyledMain height={'auto'}>
+      <MainONGProfile numberAnimals={numberAnimals}>
         {!!loading && <LoadingPawPrints show={loading} />}
         {!!error && <Message>Error al cargar, intenta nuevamente.</Message>}
         <Banner src={bannerImage} alt="Banner adopta huellas" />
@@ -225,7 +232,7 @@ export function OngProfile({ isPublic }) {
             <AnimalForm update={false} />
           </Modal.Body>
         </StyledModal>
-      </StyledMain>
+      </MainONGProfile>
     </>
   );
 }

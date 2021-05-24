@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { StyledMain } from '../../components/Main';
 
 export const Banner = styled.img`
   width: 100%;
@@ -97,9 +98,19 @@ export const ButtonsDiv = styled.div`
   @media screen and (min-width: 425px) {
     flex-direction: row;
     justify-content: space-around;
+    flex-wrap: wrap;
     & button,
     a {
       margin: 20px 10px;
+      width: fit-content;
     }
+  }
+`;
+
+export const MainONGProfile = styled(StyledMain)`
+  height: auto;
+
+  @media screen and (min-width: 768px) and (min-height: 800px) {
+    height: ${props => props.numberAnimals === 0 ? '100%' : 'auto'}
   }
 `;
