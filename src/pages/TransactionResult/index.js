@@ -40,7 +40,7 @@ export function TransactionResult() {
   );
   return (
     <>
-      <Header fixed="top" />
+      <Header />
       <TransactionMain>
         {!!transaction && transaction.status === 'Aceptada' ? (
           <Banner src={bannerImg} alt="Banner transacción aceptada" />
