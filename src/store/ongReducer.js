@@ -24,7 +24,7 @@ export function getOng() {
     } catch (error) {
       dispatch({ type: ERROR, payload: error.message });
       if (!!error.response && error.response.request.status === 401) {
-        localStorage.removeItem('token');
+        localStorage.clear();
         alert('Su sesión expiró, ingrese nuevamente.');
         history.push('/entrar');
       }

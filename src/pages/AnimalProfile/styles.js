@@ -134,6 +134,10 @@ export const MainProfilePet = styled(StyledMain)`
     height: 100%;
     padding-bottom: 30px;
   }
+
+  @media screen and (max-height: 750px) {
+    height: auto;
+  }
 `;
 
 export const Banner = styled.img`
