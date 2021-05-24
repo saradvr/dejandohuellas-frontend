@@ -14,6 +14,7 @@ export const StyledModal = styled(Modal)`
     font-size: 3vw;
   }
   & .modal-dialog-centered {
+    margin: 0 auto;
     max-width: 90%;
   }
   & .modal-body {
