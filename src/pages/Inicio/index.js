@@ -16,7 +16,7 @@ export function Inicio() {
               <p>
                 Somos una fundación sin ánimo de lucro que busca acoger animales
                 en situaciones desfavorables para cuidarlos y brindarles unas
-                mejores condiciones mientras buscando un hogar permanente para
+                mejores condiciones mientras buscamos un hogar permanente para
                 nuestros peludos.
               </p>
             </DescriptionDiv>
