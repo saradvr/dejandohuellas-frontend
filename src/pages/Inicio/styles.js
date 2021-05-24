@@ -5,7 +5,7 @@ export const InicioMain = styled.main`
   background-image: url(${backImage});
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: -600px;
+  background-position: -75vh;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -13,13 +13,19 @@ export const InicioMain = styled.main`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding-top: 40px;
+
+  @media screen and (min-width: 460px) {
+    background-position: center;
+  }
 
   @media screen and (min-width: 630px) {
-    background-position: center;
     display: grid;
     grid-template-columns: 1fr 1fr;
     text-align: center;
+  }
+
+  @media screen and (min-width: 1250px) {
+    background-position: center top;
   }
 `;
 
@@ -27,6 +33,7 @@ export const TitleH1 = styled.h1`
   font-family: 'Snowy Night';
   color: #227f83;
   margin: 20px;
+  text-align: center;
 
   @media screen and (min-width: 630px) {
     align-self: flex-end;
@@ -44,6 +51,7 @@ export const MainSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  margin-bottom: 50px;
 
   a {
     width: 80%;

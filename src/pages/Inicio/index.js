@@ -7,7 +7,7 @@ export function Inicio() {
   const userType = localStorage.getItem('userType');
   return (
     <>
-      <Header fixed="top" />
+      <Header />
       <InicioMain>
         <TitleH1>Dejando Huellas</TitleH1>
         <MainSection>
