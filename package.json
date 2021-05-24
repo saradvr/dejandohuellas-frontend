@@ -22,7 +22,7 @@
     "web-vitals": "^1.0.1"
   },
   "engines": {
-    "node": "14.15.3",
+    "create-react-app": "4.0.3",
     "yarn": "1.22.10",
     "npm": "6.14.9"
   },
