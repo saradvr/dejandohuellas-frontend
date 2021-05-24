@@ -39,10 +39,6 @@ export const TitleH1 = styled.h1`
     align-self: flex-end;
     font-size: 60px;
   }
-
-  @media screen and (min-width: 1024px) {
-    align-self: center;
-  }
 `;
 
 export const MainSection = styled.section`
