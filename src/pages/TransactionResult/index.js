@@ -42,11 +42,11 @@ export function TransactionResult() {
     <>
       <Header />
       <TransactionMain>
-        {!!transaction && transaction.status === 'Aceptada' ? (
+        {!!transaction && (transaction.status === 'Aceptada' ? (
           <Banner src={bannerImg} alt="Banner transacción aceptada" />
         ) : (
           <Banner src={bannerImgRejected} alt="Banner transacción rechazada" />
-        )}
+        ))}
         <ResultContainer>
           <StyledP>Su transacción fue:</StyledP>
           {!!error && <p>{error}</p>}
