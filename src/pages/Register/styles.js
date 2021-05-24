@@ -1,30 +1,35 @@
 import styled from 'styled-components';
+import { StyledMain } from '../../components/Main';
 import fondo from './register.png';
 
 export const StyledForm = styled.form`
   background-color: rgba(246, 244, 235, 0.44);
   border-radius: 10px;
   padding: 20px;
-  margin: auto;
+  margin: 0 auto 30px;
   height: auto;
   width: 90%;
   text-align: center;
-  grid-column: 1;
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 768px) {
+    grid-column: 1;
     width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
 export const ImgSection = styled.section`
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
   text-align: center;
-  margin-top: 4%;
+  display: flex;
+  flex-direction: column;
 
   @media screen and (min-width: 768px) {
+    display: grid;
     background-image: url(${fondo});
     background-repeat: no-repeat;
     background-size: cover;
@@ -34,19 +39,30 @@ export const ImgSection = styled.section`
     background-position: right;
   }
 
-  @media screen and (min-width: 1440px) {
-    margin-top: 2%;
+  @media screen and (max-height: 620px) and (min-width: 768px) {
+    height: auto;
   }
 `;
 
 export const StyledTitle = styled.h1`
-  grid-column: 1;
   font-family: 'Snowy Night';
-  align-self: end;
+  align-self: center;
   color: black;
   width: 100%;
+  margin: 40px 0;
 
   @media screen and (min-width: 768px) {
-    font-size: 7vw;
+    grid-column: 1;
+    font-size: 5vw;
+  }
+`;
+
+export const RegisterMain = styled(StyledMain)`
+  @media screen and (min-height: 525px) {
+    height: 100%;
+  }
+
+  @media screen and (max-height: 620px) and (min-width: 768px) {
+    height: auto;
   }
 `;

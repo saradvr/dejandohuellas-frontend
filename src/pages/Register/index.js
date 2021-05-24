@@ -7,8 +7,7 @@ import { Header } from '../../components/Header';
 import { useHistory } from 'react-router';
 import { FormLabel } from '../../components/FormLabel';
 import { FormSelect } from '../../components/FormSelect';
-import { StyledMain } from '../../components/Main';
-import { ImgSection, StyledForm, StyledTitle } from './styles';
+import { ImgSection, RegisterMain, StyledForm, StyledTitle } from './styles';
 import { LoadingPawPrints } from '../../components/LoadingPawPrints';
 
 export function Register() {
@@ -48,8 +47,8 @@ export function Register() {
 
   return (
     <>
-      <Header fixed="top" sticky="" />
-      <StyledMain>
+      <Header />
+      <RegisterMain justify='center' height='auto'>
         <ImgSection>
           <StyledTitle>¡Regístrate!</StyledTitle>
           <StyledForm onSubmit={handleSubmit}>
@@ -106,7 +105,7 @@ export function Register() {
             <Button type="submit">Registrarme</Button>
           </StyledForm>
         </ImgSection>
-      </StyledMain>
+      </RegisterMain>
     </>
   );
 }
