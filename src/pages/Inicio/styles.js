@@ -24,7 +24,7 @@ export const InicioMain = styled.main`
     text-align: center;
   }
 
-  @media screen and (min-width: 1250px) {
+  @media screen and (min-width: 1024px) {
     background-position: center top;
   }
 `;
