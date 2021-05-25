@@ -28,6 +28,7 @@ import bannerImage from './Perfil-fundación.png';
 import { ModalMessage } from '../../components/ModalMessage';
 import { LinkButton } from '../../components/LinkButton';
 import { LoadingPawPrints } from '../../components/LoadingPawPrints';
+import logo from './Logo.png';
 
 export function OngProfile({ isPublic }) {
   const dispatch = useDispatch();
@@ -115,7 +116,7 @@ export function OngProfile({ isPublic }) {
         <InfoONG>
           <LogoContainer>
             <StyledLogo
-              src="https://rlv.zcache.com/black_and_white_pet_paw_print_button-r8f42e2ca39da4e53b0f410ae28247355_k94rf_704.jpg?rlvnet=1"
+              src={logo}
               alt="logo huellas"
             />
           </LogoContainer>

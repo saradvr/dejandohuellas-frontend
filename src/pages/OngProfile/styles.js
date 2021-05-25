@@ -54,7 +54,7 @@ export const LogoContainer = styled.div`
 
 export const StyledLogo = styled.img`
   margin: 0 auto;
-  border-radius: 10px;
+  border-radius: 100%;
   width: 100%;
   max-width: 260px;
   box-shadow: black 0px 0px 15px 0px;
