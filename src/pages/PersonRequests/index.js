@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header } from '../../components/Header';
-import { StyledMain } from '../../components/Main';
 import { PersonRequest } from '../../components/PersonRequest';
 import { getPerson } from '../../store/personReducer';
-import { Banner, RequestsSection } from './styles';
+import { Banner, MainPersonRequests, RequestsSection } from './styles';
 import bannerImg from './SOLICITUD.png';
 
 export function PersonRequests() {
-  const [heightMain, setHeightMain] = useState('100%');
+  const [numberRequests, setNumberRequests] = useState(0);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPerson());
@@ -19,15 +18,15 @@ export function PersonRequests() {
   }));
 
   useEffect(() => {
-    if (!!person && !!person.requests && person.requests.length > 0) {
-      setHeightMain('auto');
+    if (!!person && !!person.requests) {
+      setNumberRequests(person.requests.length);
     }
   }, [person]);
 
   return (
     <>
       <Header />
-      <StyledMain height={heightMain}>
+      <MainPersonRequests numberRequests={numberRequests}>
         <Banner src={bannerImg} alt="Banner solicitudes adopción" />
         <RequestsSection>
           {!!person &&
@@ -40,7 +39,7 @@ export function PersonRequests() {
               <p>Aún no tienes solicitudes de adopción.</p>
             ))}
         </RequestsSection>
-      </StyledMain>
+      </MainPersonRequests>
     </>
   );
 }
