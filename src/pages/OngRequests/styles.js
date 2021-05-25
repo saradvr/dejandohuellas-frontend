@@ -43,4 +43,8 @@ export const OngRequestsMain = styled(StyledMain)`
   @media screen and (min-width: 1440px) {
     height: ${(props) => (props.numberRequests <= 4 ? '100%' : 'auto')};
   }
+
+  @media screen and (min-height: 971px) {
+    height: ${(props) => (props.numberRequests <= 4 ? '100%' : 'auto')};
+  }
 `;
