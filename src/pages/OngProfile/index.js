@@ -115,7 +115,7 @@ export function OngProfile({ isPublic }) {
         <InfoONG>
           <LogoContainer>
             <StyledLogo
-              src="https://image.shutterstock.com/image-vector/flat-design-paw-print-icon-260nw-461822491.jpg"
+              src="https://rlv.zcache.com/black_and_white_pet_paw_print_button-r8f42e2ca39da4e53b0f410ae28247355_k94rf_704.jpg?rlvnet=1"
               alt="logo huellas"
             />
           </LogoContainer>
