@@ -19,7 +19,7 @@ export function PersonRequest({ request }) {
   return (
     <StyledArticle>
       <PetImage src={profilePicture} alt="Foto de perfil del animal" />
-      <AnimalNameH2>{name}!</AnimalNameH2>
+      <AnimalNameH2>{name}</AnimalNameH2>
       <p>{ong.user.name}</p>
       <p>
         <strong>Estado: </strong>
