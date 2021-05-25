@@ -51,9 +51,7 @@ export const RequestInfoSection = styled.section`
 export const RequestMain = styled(StyledMain)`
   height: auto;
 
-  @media screen and (min-width: 1024px) {
-    height: 100%;
-    justify-content: space-around;
+  @media screen and (min-width: 1024px) and (min-height: 800px) {
     padding-bottom: 50px;
   }
 `;
