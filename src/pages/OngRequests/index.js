@@ -4,15 +4,14 @@ import { FormLabel } from '../../components/FormLabel';
 import { FormSelect } from '../../components/FormSelect';
 import { Header } from '../../components/Header';
 import { LoadingPawPrints } from '../../components/LoadingPawPrints';
-import { StyledMain } from '../../components/Main';
 import { OngRequest } from '../../components/OngRequest';
 import { getRequests } from '../../store/adoptionReducer';
 import { getOng } from '../../store/ongReducer';
-import { FilterGroup, FiltersSection, RequestsSection } from './styles';
+import { FilterGroup, FiltersSection, OngRequestsMain, RequestsSection } from './styles';
 import banner from './bannerRequests.png';
 
 export function OngRequests() {
-  const [heightMain, setHeightMain] = useState('100%');
+  const [numberRequests, setNumberRequests] = useState(0);
   const [filterAnimalId, setFilterAnimalId] = useState('');
   const [filterStatus, setFilterStatus] = useState('');
   const [filterAnimalType, setFilterAnimalType] = useState('');
@@ -43,10 +42,8 @@ export function OngRequests() {
   }, [dispatch, filterStatus, filterAnimalId, filterAnimalType]);
 
   useEffect(() => {
-    if (!!requests && requests.length > 4) {
-      setHeightMain('auto');
-    } else {
-      setHeightMain('100%');
+    if (!!requests) {
+      setNumberRequests(requests.length);
     }
   }, [requests.length, requests]);
 
@@ -57,7 +54,7 @@ export function OngRequests() {
   return (
     <>
       <Header />
-      <StyledMain height={heightMain}>
+      <OngRequestsMain numberRequests={numberRequests}>
         <img src={banner} alt="Banner" width="100%" />
         {!!loading && <LoadingPawPrints show={loading} />}
         <FiltersSection>
@@ -124,7 +121,7 @@ export function OngRequests() {
             <p>Aún no hay solicitudes con estas características.</p>
           )}
         </RequestsSection>
-      </StyledMain>
+      </OngRequestsMain>
     </>
   );
 }

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { StyledMain } from '../../components/Main';
 
 export const FiltersSection = styled.section`
   width: 80%;
@@ -27,10 +28,19 @@ export const RequestsSection = styled.section`
   flex-direction: column;
   width: 90%;
   justify-content: center;
+  margin-bottom: 60px;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+  }
+`;
+
+export const OngRequestsMain = styled(StyledMain)`
+  height: ${props => props.numberRequests === 0 ? '100%' : 'auto'};
+
+  @media screen and (min-width: 1440px) {
+    height: ${props => props.numberRequests <= 4 ? '100%' : 'auto'};
   }
 `;
