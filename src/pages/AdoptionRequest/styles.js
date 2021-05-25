@@ -16,8 +16,8 @@ export const StyledNameH2 = styled.h2`
   text-shadow: -2px 2px 0px white;
 
   @media screen and (min-width: 768px) {
-    margin-top: 50px;
-    font-size: 50px;
+    margin-top: 30px;
+    font-size: 30px;
   }
 
   @media screen and (min-width: 1024px) {
@@ -111,7 +111,16 @@ export const Banner = styled.img`
 export const AdoptMain = styled(StyledMain)`
   height: auto;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 768px) and (min-height: 678px) {
     height: 100%;
   }
+
+  @media screen and (min-width: 1440px) {
+    height: auto;
+
+    @media screen and (min-height: 800px) {
+      height: 100%;
+    }
+  }
+
 `;
