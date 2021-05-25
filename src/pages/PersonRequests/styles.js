@@ -37,7 +37,7 @@ export const MainPersonRequests = styled(StyledMain)`
       height: ${props => props.numberRequests === 0 ? '100%' : 'auto'};
     }
     @media screen and (min-height: 950px) {
-      height: ${props => props.numberRequests < 4 ? '100%' : 'auto'};
+      height: ${props => props.numberRequests <= 4 ? '100%' : 'auto'};
     }
   }
 `;
