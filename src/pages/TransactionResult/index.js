@@ -10,7 +10,7 @@ import {
   ResultContainer,
   StyledP,
   StyledPResult,
-  TransactionMain
+  TransactionMain,
 } from './styles';
 import bannerImg from './bannerTransaction.png';
 import bannerImgRejected from './bannerTransactionNo.png';
@@ -42,11 +42,17 @@ export function TransactionResult() {
     <>
       <Header />
       <TransactionMain>
-        {!!transaction && !!transaction.status && transaction.status !== '' && (transaction.status === 'Aceptada' ? (
-          <Banner src={bannerImg} alt="Banner transacción aceptada" />
-        ) : (
-          <Banner src={bannerImgRejected} alt="Banner transacción rechazada" />
-        ))}
+        {!!transaction &&
+          !!transaction.status &&
+          transaction.status !== '' &&
+          (transaction.status === 'Aceptada' ? (
+            <Banner src={bannerImg} alt="Banner transacción aceptada" />
+          ) : (
+            <Banner
+              src={bannerImgRejected}
+              alt="Banner transacción rechazada"
+            />
+          ))}
         <ResultContainer>
           <StyledP>Su transacción fue:</StyledP>
           {!!error && <p>{error}</p>}

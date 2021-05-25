@@ -111,6 +111,6 @@ export const MainONGProfile = styled(StyledMain)`
   height: auto;
 
   @media screen and (min-width: 768px) and (min-height: 800px) {
-    height: ${props => props.numberAnimals === 0 ? '100%' : 'auto'}
+    height: ${(props) => (props.numberAnimals === 0 ? '100%' : 'auto')};
   }
 `;

@@ -7,7 +7,12 @@ import { LoadingPawPrints } from '../../components/LoadingPawPrints';
 import { OngRequest } from '../../components/OngRequest';
 import { getRequests } from '../../store/adoptionReducer';
 import { getOng } from '../../store/ongReducer';
-import { FilterGroup, FiltersSection, OngRequestsMain, RequestsSection } from './styles';
+import {
+  FilterGroup,
+  FiltersSection,
+  OngRequestsMain,
+  RequestsSection,
+} from './styles';
 import banner from './bannerRequests.png';
 
 export function OngRequests() {

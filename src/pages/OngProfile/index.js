@@ -53,7 +53,7 @@ export function OngProfile({ isPublic }) {
   );
 
   useEffect(() => {
-    if(!!ong && !!ong.animals) {
+    if (!!ong && !!ong.animals) {
       setNumberAnimals(ong.animals.length);
     }
   }, [ong]);

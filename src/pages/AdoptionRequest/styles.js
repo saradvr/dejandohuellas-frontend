@@ -122,5 +122,4 @@ export const AdoptMain = styled(StyledMain)`
       height: 100%;
     }
   }
-
 `;

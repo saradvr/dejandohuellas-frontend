@@ -48,7 +48,7 @@ export function Register() {
   return (
     <>
       <Header />
-      <RegisterMain justify='center' height='auto'>
+      <RegisterMain justify="center" height="auto">
         <ImgSection>
           <StyledTitle>¡Regístrate!</StyledTitle>
           <StyledForm onSubmit={handleSubmit}>

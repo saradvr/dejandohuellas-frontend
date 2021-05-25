@@ -38,9 +38,9 @@ export const RequestsSection = styled.section`
 `;
 
 export const OngRequestsMain = styled(StyledMain)`
-  height: ${props => props.numberRequests === 0 ? '100%' : 'auto'};
+  height: ${(props) => (props.numberRequests === 0 ? '100%' : 'auto')};
 
   @media screen and (min-width: 1440px) {
-    height: ${props => props.numberRequests <= 4 ? '100%' : 'auto'};
+    height: ${(props) => (props.numberRequests <= 4 ? '100%' : 'auto')};
   }
 `;
